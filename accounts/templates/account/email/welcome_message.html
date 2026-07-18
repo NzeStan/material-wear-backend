@@ -1,0 +1,166 @@
+{% load i18n %}<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1F2937;
+            margin: 0;
+            padding: 0;
+            background-color: #F3F4F6;
+        }
+        .container { 
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .email-wrapper {
+            background-color: #FFFBEB;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header { 
+            background-color: #064E3B;
+            color: #FFFBEB;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .header .tagline {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #F59E0B;
+            font-weight: 500;
+        }
+        .content { 
+            padding: 30px 25px;
+            background-color: #FFFBEB;
+        }
+        .content p {
+            margin: 15px 0;
+            color: #1F2937;
+        }
+        .content ul {
+            margin: 20px 0;
+            padding-left: 25px;
+        }
+        .content li {
+            margin: 10px 0;
+            color: #1F2937;
+        }
+        .content li::marker {
+            color: #F59E0B;
+        }
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F59E0B;
+            margin: 25px 0 8px 0;
+        }
+        .button-wrapper {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .button { 
+            display: inline-block;
+            background-color: #F59E0B;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #D97706;
+        }
+        .footer {
+            background-color: #064E3B;
+            color: #FFFBEB;
+            padding: 20px 25px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer a {
+            color: #F59E0B;
+            text-decoration: none;
+        }
+        .highlight {
+            color: #064E3B;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="email-wrapper">
+            <div class="header">
+                <h1>Welcome to MATERIAL WEAR!</h1>
+                <div class="tagline">Quality Fashion & Wear</div>
+            </div>
+            
+            <div class="content">
+                <p>Hello <span class="highlight">{{ user.first_name|default:"there" }}</span>,</p>
+                
+                <p>Thank you for creating an account with <strong>MATERIAL WEAR</strong>. We're excited to have you join our growing community of NYSC corps members, church organisations, and institutions across Nigeria!</p>
+                
+                <p>Here is everything you can do with your new account:</p>
+
+                <p class="section-label">🛍️ Shop & Order</p>
+                <ul>
+                    <li>Browse and order NYSC uniforms, church merchandise, and branded apparel</li>
+                    <li>Save your measurements for fast, accurate sizing on every order</li>
+                    <li>Track your individual orders from placement through to delivery</li>
+                </ul>
+
+                <p class="section-label">📦 Bulk & Group Orders</p>
+                <ul>
+                    <li>Join coordinator-led bulk orders — submit your details via a shared link and pay individually</li>
+                    <li>Upload photos or images as part of an image bulk order for personalised items</li>
+                    <li>Download your PDF or Word receipt once your group order is confirmed</li>
+                </ul>
+
+                <p class="section-label">📋 Live Forms</p>
+                <ul>
+                    <li>Fill in live collaborative forms shared by your organisation — like Google Sheets, but purpose-built for apparel ordering</li>
+                    <li>Get an instant email confirmation with your submission details and serial number</li>
+                    <li>See a live count of participants as entries roll in</li>
+                </ul>
+
+                <p class="section-label">💳 Payments & Receipts</p>
+                <ul>
+                    <li>Pay securely via Paystack — card, bank transfer, and USSD supported</li>
+                    <li>Receive auto-generated PDF receipts in your inbox the moment your payment is confirmed</li>
+                    <li>Use referral codes to earn rewards on qualifying orders</li>
+                </ul>
+                
+                <div class="button-wrapper">
+                    <a href="{{ login_url }}" class="button">Get Started</a>
+                </div>
+                
+                <p>If you have any questions or need assistance, our support team is always ready to help. Just reply to this email or reach out through any of our contact channels.</p>
+                
+                <p>Best regards,<br><span class="highlight">The MATERIAL Team</span></p>
+            </div>
+            
+            <div class="footer">
+                <p>&copy; {% now "Y" %} MATERIAL WEAR</p>
+                <p>Your trusted source for quality NYSC and branded merchandise across Nigeria</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Church Orders - {{ church }}</title>
+    <style>
+        @page { 
+            size: A4 landscape; 
+            margin: 1cm 1cm 3cm 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 9pt;
+            line-height: 1.3;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #064E3B;
+        }
+        .header h1 {
+            color: #064E3B;
+            margin: 5px 0;
+        }
+        .header .subtitle {
+            color: #F59E0B;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        .summary {
+            background-color: #FFFBEB;
+            border: 2px solid #F59E0B;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .summary table {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .summary table th {
+            background-color: #064E3B;
+            color: white;
+            padding: 6px;
+            font-size: 9pt;
+        }
+        .summary table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        h3 {
+            color: #064E3B;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #F59E0B;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+        }
+        table th {
+            background-color: #064E3B;
+            color: white;
+            padding: 8px 5px;
+            text-align: left;
+            font-weight: bold;
+        }
+        table td {
+            padding: 6px 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 2px solid #064E3B;
+            text-align: center;
+            font-size: 9pt;
+            color: #666;
+        }
+        .size-section {
+            margin-bottom: 25px;
+        }
+        .size-header {
+            background-color: #F59E0B;
+            color: white;
+            padding: 8px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .not-applicable {
+            color: #EF4444;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MATERIAL ACCESSORIES</h1>
+        <div class="subtitle">CHURCH ORDERS REPORT</div>
+        <div>Church: <strong>{{ church }}</strong></div>
+        <div>Generated: {% now "F d, Y g:i A" %}</div>
+    </div>
+
+    {% if summary %}
+    <div class="summary">
+        <h3 style="margin-top: 0; color: #064E3B;">ORDER SUMMARY</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Total Qty</th>
+                    <th>Pickup</th>
+                    <th>Delivery</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in summary %}
+                <tr>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.size }}</td>
+                    <td><strong>{{ item.total_quantity }}</strong></td>
+                    <td>{{ item.pickup_count }}</td>
+                    <td>{{ item.delivery_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <h3>Order Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 3%;">#</th>
+                <th style="width: 20%;">Full Name</th>
+                <th style="width: 15%;">Product</th>
+                <th style="width: 15%;">Custom Name</th>
+                <th style="width: 7%;">Size</th>
+                <th style="width: 5%;">Qty</th>
+                <th style="width: 10%;">Pickup</th>
+                <th style="width: 12%;">Delivery State</th>
+                <th style="width: 13%;">Delivery LGA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.sn }}</td>
+                <td>{{ order.full_name }}</td>
+                <td>{{ order.product }}</td>
+                <td>{{ order.custom_name|default:"N/A" }}</td>
+                <td>{{ order.size }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{% if order.pickup_on_camp %}✓ Yes{% else %}No{% endif %}</td>
+                <td>
+                    {% if order.pickup_on_camp %}
+                        <span class="not-applicable">✗</span>
+                    {% else %}
+                        {{ order.delivery_state }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if order.pickup_on_camp %}
+                        <span class="not-applicable">✗</span>
+                    {% else %}
+                        {{ order.delivery_lga }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="page-break"></div>
+
+    {% if sizes_grouping %}
+    <h3>Custom Names Grouped by Size</h3>
+    {% for size, names in sizes_grouping.items %}
+    <div class="size-section">
+        <div class="size-header">Size: {{ size }}</div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 30%;">Full Name</th>
+                    <th style="width: 30%;">Custom Name</th>
+                    <th style="width: 20%;">Product</th>
+                    <th style="width: 15%;">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name_data in names %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ name_data.full_name }}</td>
+                    <td><strong>{{ name_data.custom_name }}</strong></td>
+                    <td>{{ name_data.product }}</td>
+                    <td>{{ name_data.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="footer">
+        <p><strong>MATERIAL Wear - Church Orders Report</strong></p>
+        <p>Generated: {% now "F d, Y g:i A" %}</p>
+    </div>
+</body>
+</html>

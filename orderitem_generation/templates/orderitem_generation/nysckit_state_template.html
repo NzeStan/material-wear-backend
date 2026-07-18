@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NYSC Kit Orders - {{ state }}</title>
+    <style>
+        @page { 
+            size: A4 landscape; 
+            margin: 1cm 1cm 3cm 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 9pt;
+            line-height: 1.3;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #064E3B;
+        }
+        .header h1 {
+            color: #064E3B;
+            margin: 5px 0;
+        }
+        .header .subtitle {
+            color: #F59E0B;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        .section-header {
+            background-color: #F59E0B;
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 11pt;
+            border-radius: 4px;
+        }
+        .summary {
+            background-color: #FFFBEB;
+            border: 2px solid #F59E0B;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8pt;
+            margin-bottom: 25px;
+        }
+        table th {
+            background-color: #064E3B;
+            color: white;
+            padding: 8px 5px;
+            text-align: left;
+            font-weight: bold;
+        }
+        table td {
+            padding: 6px 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        table tfoot tr {
+            background-color: #FFFBEB;
+            font-weight: bold;
+            border-top: 2px solid #064E3B;
+        }
+        table tfoot td {
+            padding: 10px 5px;
+            border-bottom: none;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 2px solid #064E3B;
+            text-align: center;
+            font-size: 9pt;
+            color: #666;
+        }
+        .no-data {
+            color: #999;
+            font-style: italic;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        .summary-table {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MATERIAL ACCESSORIES</h1>
+        <div class="subtitle">NYSC KIT ORDERS REPORT</div>
+        <div>State: <strong>{{ state }}</strong></div>
+        <div>Generated: {% now "F d, Y g:i A" %}</div>
+    </div>
+
+    {% if total_kakhis or total_vests or total_caps %}
+    <div class="summary">
+        <h3 style="margin-top: 0; color: #064E3B;">ORDER SUMMARY</h3>
+        <div style="display: flex; justify-content: space-around;">
+            <div>
+                <strong>Kakhi Orders:</strong> {{ total_kakhis }}
+            </div>
+            <div>
+                <strong>Vest Orders:</strong> {{ total_vests }}
+            </div>
+            <div>
+                <strong>Cap Orders:</strong> {{ total_caps }}
+            </div>
+            <div>
+                <strong>Total Orders:</strong> {{ total_kakhis|add:total_vests|add:total_caps }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- ORDER SUMMARY BY LGA -->
+    {% if lga_summary %}
+    <div class="section-header">ORDER SUMMARY BY LGA</div>
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th style="width: 30%;">Product</th>
+                <th style="width: 15%;">Size</th>
+                <th style="width: 25%;">LGA</th>
+                <th style="width: 15%;">Orders</th>
+                <th style="width: 15%;">Total Qty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in lga_summary %}
+            <tr>
+                <td>{{ item.product }}</td>
+                <td><strong>{{ item.size }}</strong></td>
+                <td>{{ item.lga }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-data" style="text-align: center;">No summary available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="page-break"></div>
+    {% endif %}
+
+    <!-- PRODUCT SUMMARY -->
+    {% if product_summary %}
+    <div class="section-header">PRODUCT SUMMARY</div>
+    <table class="summary-table">
+        <thead>
+            <tr>
+                <th style="width: 40%;">Product</th>
+                <th style="width: 20%;">Size</th>
+                <th style="width: 20%;">Total Orders</th>
+                <th style="width: 20%;">Total Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in product_summary %}
+            <tr>
+                <td>{{ item.product }}</td>
+                <td><strong>{{ item.size }}</strong></td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="no-data" style="text-align: center;">No summary available.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" style="text-align: right; color: #064E3B;">
+                    <strong>GRAND TOTAL</strong>
+                </td>
+                <td><strong>{{ grand_total_count }}</strong></td>
+                <td><strong>{{ grand_total_quantity }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="page-break"></div>
+    {% endif %}
+
+    {% if kakhi_orders %}
+    <div class="section-header">KAKHI ORDERS</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 5%;">#</th>
+                <th style="width: 25%;">Full Name</th>
+                <th style="width: 15%;">Call-Up Number</th>
+                <th style="width: 15%;">LGA</th>
+                <th style="width: 20%;">Product</th>
+                <th style="width: 10%;">Size</th>
+                <th style="width: 10%;">Qty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in kakhi_orders %}
+            <tr>
+                <td>{{ item.sn }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.call_up_number }}</td>
+                <td>{{ item.lga }}</td>
+                <td>{{ item.product }}</td>
+                <td><strong>{{ item.size }}</strong></td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="page-break"></div>
+
+    <!-- Separate Measurements Table -->
+    <div class="section-header">KAKHI MEASUREMENTS (inches)</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 3%;">#</th>
+                <th>Chest</th>
+                <th>Shoulder</th>
+                <th>Neck</th>
+                <th>Sleeve Len</th>
+                <th>Sleeve Round</th>
+                <th>Top Len</th>
+                <th>Waist</th>
+                <th>Thigh</th>
+                <th>Knee</th>
+                <th>Ankle</th>
+                <th>Hips</th>
+                <th>Trouser Len</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in kakhi_orders %}
+            <tr>
+                <td>{{ item.sn }}</td>
+                {% if item.measurement %}
+                <td>{{ item.measurement.chest|default:"N/A" }}</td>
+                <td>{{ item.measurement.shoulder|default:"N/A" }}</td>
+                <td>{{ item.measurement.neck|default:"N/A" }}</td>
+                <td>{{ item.measurement.sleeve_length|default:"N/A" }}</td>
+                <td>{{ item.measurement.sleeve_round|default:"N/A" }}</td>
+                <td>{{ item.measurement.top_length|default:"N/A" }}</td>
+                <td>{{ item.measurement.waist|default:"N/A" }}</td>
+                <td>{{ item.measurement.thigh|default:"N/A" }}</td>
+                <td>{{ item.measurement.knee|default:"N/A" }}</td>
+                <td>{{ item.measurement.ankle|default:"N/A" }}</td>
+                <td>{{ item.measurement.hips|default:"N/A" }}</td>
+                <td>{{ item.measurement.trouser_length|default:"N/A" }}</td>
+                {% else %}
+                <td colspan="12" class="no-data">No measurements available</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="page-break"></div>
+    {% endif %}
+
+    {% if vest_orders %}
+    <div class="section-header">VEST ORDERS</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 5%;">#</th>
+                <th style="width: 25%;">Full Name</th>
+                <th style="width: 15%;">Call-Up Number</th>
+                <th style="width: 15%;">LGA</th>
+                <th style="width: 10%;">Size</th>
+                <th style="width: 8%;">Quantity</th>
+                <th style="width: 22%;">Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in vest_orders %}
+            <tr>
+                <td>{{ item.sn }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.call_up_number }}</td>
+                <td>{{ item.lga }}</td>
+                <td><strong>{{ item.size }}</strong></td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="page-break"></div>
+    {% endif %}
+
+    {% if cap_orders %}
+    <div class="section-header">CAP ORDERS</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 5%;">#</th>
+                <th style="width: 25%;">Full Name</th>
+                <th style="width: 15%;">Call-Up Number</th>
+                <th style="width: 15%;">LGA</th>
+                <th style="width: 10%;">Size</th>
+                <th style="width: 8%;">Quantity</th>
+                <th style="width: 22%;">Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cap_orders %}
+            <tr>
+                <td>{{ item.sn }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.call_up_number }}</td>
+                <td>{{ item.lga }}</td>
+                <td><strong>{{ item.size }}</strong></td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.product }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <div class="footer">
+        <p><strong>MATERIAL Wear - NYSC Kit Orders Report</strong></p>
+        <p>State: {{ state }} | Generated: {% now "F d, Y g:i A" %}</p>
+        <p style="font-size: 8pt; color: #666;">
+            For inquiries, contact MATERIAL Wear
+        </p>
+    </div>
+</body>
+</html>

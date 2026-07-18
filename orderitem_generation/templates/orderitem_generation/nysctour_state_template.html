@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NYSC Tour Orders - {{ state }}</title>
+    <style>
+        @page { 
+            size: A4; 
+            margin: 1cm 1cm 3cm 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #064E3B;
+        }
+        .header h1 {
+            color: #064E3B;
+            margin: 5px 0;
+        }
+        .header .subtitle {
+            color: #F59E0B;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+        .summary {
+            background-color: #FFFBEB;
+            border: 2px solid #F59E0B;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .summary-item {
+            text-align: center;
+        }
+        .summary-label {
+            color: #064E3B;
+            font-weight: bold;
+            font-size: 9pt;
+            margin-bottom: 5px;
+        }
+        .summary-value {
+            color: #F59E0B;
+            font-size: 20pt;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th {
+            background-color: #064E3B;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: bold;
+        }
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 2px solid #064E3B;
+            text-align: center;
+            font-size: 9pt;
+            color: #666;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>NYSC TOUR ORDERS REPORT</h1>
+        <div class="subtitle">State: {{ state }}</div>
+    </div>
+
+    <div class="summary">
+        <div class="summary-item">
+            <div class="summary-label">Total Orders</div>
+            <div class="summary-value">{{ total_orders }}</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">#</th>
+                <th style="width: 50%;">Full Name</th>
+                <th style="width: 40%;">Call Up Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in tour_orders %}
+            <tr>
+                <td>{{ item.sn }}</td>
+                <td>{{ item.full_name }}</td>
+                <td>{{ item.call_up_number }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" style="text-align: center; color: #999;">No tour orders found for this state</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p><strong>MATERIAL Wear - NYSC Tour Orders Report</strong></p>
+        <p>Generated: {% now "F d, Y g:i A" %}</p>
+    </div>
+</body>
+</html>

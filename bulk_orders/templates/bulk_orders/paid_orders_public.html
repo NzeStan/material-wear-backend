@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Orders - {{ bulk_order.organization_name }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: #FFFBEB;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            border-top: 5px solid #F59E0B;
+        }
+        .header h1 {
+            color: #064E3B;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .header .org-name {
+            color: #F59E0B;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px -10px;
+            gap: 20px;
+        }
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255, 251, 235, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border-left: 4px solid #F59E0B;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.3);
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #064E3B;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #1F2937;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .content-card {
+            background: #FFFBEB;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
+        }
+        .section-title {
+            color: #064E3B;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #F59E0B;
+            padding-bottom: 12px;
+        }
+        
+        .size-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .size-badge {
+            flex: 0 0 calc(25% - 15px);
+            min-width: 120px;
+            background: linear-gradient(135deg, #064E3B 0%, #065F46 100%);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(6, 78, 59, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .size-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(6, 78, 59, 0.4);
+        }
+        .size-label {
+            font-size: 14px;
+            color: #FFFBEB;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .size-count {
+            font-size: 36px;
+            font-weight: bold;
+            color: #F59E0B;
+        }
+        
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .order-item {
+            background: linear-gradient(to right, #FFFBEB, #FEF3C7);
+            padding: 18px 25px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid #064E3B;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .order-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(6, 78, 59, 0.2);
+        }
+        .order-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .order-number {
+            background: #064E3B;
+            color: #FFFBEB;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .order-name {
+            font-weight: 600;
+            color: #1F2937;
+            font-size: 16px;
+        }
+        .order-size {
+            background: #F59E0B;
+            color: #FFFBEB;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: #FFFBEB;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(245, 158, 11, 0.6);
+            background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+        }
+        
+        .footer {
+            text-align: center;
+            color: #FFFBEB;
+            padding: 35px;
+            font-size: 14px;
+            background: rgba(6, 78, 59, 0.3);
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        .footer a {
+            color: #F59E0B;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .footer a:hover {
+            color: #FCD34D;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 25px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .header .org-name {
+                font-size: 18px;
+            }
+            .content-card {
+                padding: 25px;
+            }
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .stat-card {
+                flex: 0 0 100%;
+            }
+            .size-badge {
+                flex: 0 0 calc(50% - 15px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✓ Completed Orders</h1>
+            <div class="org-name">{{ bulk_order.organization_name }}</div>
+            <p style="color: #1F2937; margin-top: 10px; font-weight: 500;">
+                Join {{ total_paid }} others who have already completed their orders!
+            </p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">{{ total_paid }}</div>
+                <div class="stat-label">Paid Orders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ size_summary|length }}</div>
+                <div class="stat-label">Sizes Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">
+                    {% if bulk_order.payment_deadline > now %}
+                        {{ days_remaining }}
+                    {% else %}
+                        Closed
+                    {% endif %}
+                </div>
+                <div class="stat-label">
+                    {% if bulk_order.payment_deadline > now %}
+                        Days Remaining
+                    {% else %}
+                        Payment Period
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">Orders by Size</h2>
+            <div class="size-grid">
+                {% for size in size_summary %}
+                <div class="size-badge">
+                    <div class="size-label">Size {{ size.size }}</div>
+                    <div class="size-count">{{ size.count }}</div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div style="text-align: center; margin: 35px 0;">
+                <a href="?download=pdf" class="download-btn">
+                    📄 Download Full Report (PDF)
+                </a>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">Recent Completed Orders</h2>
+            <div class="orders-list">
+                {% for order in recent_orders %}
+                <div class="order-item">
+                    <div class="order-info">
+                        <span class="order-number">#{{ order.serial_number }}</span>
+                        <span class="order-name">{{ order.full_name }}</span>
+                    </div>
+                    <span class="order-size">{{ order.size }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            
+            {% if paid_orders.count > 20 %}
+            <p style="text-align: center; margin-top: 25px; color: #1F2937; font-weight: 500;">
+                Showing 20 most recent orders. Download PDF for complete list.
+            </p>
+            {% endif %}
+        </div>
+
+        <div class="footer">
+            <p>Powered by <a href="#">{{ company_name }}</a></p>
+            <p style="margin-top: 12px; opacity: 0.9;">
+                Secure payments • Real-time tracking • Professional service
+            </p>
+        </div>
+    </div>
+</body>
+</html>
