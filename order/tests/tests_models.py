@@ -18,6 +18,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.utils import timezone
+from datetime import timedelta
 from order.models import BaseOrder, NyscKitOrder, NyscTourOrder, ChurchOrder, OrderItem
 from products.models import Category, NyscKit, NyscTour, Church
 import uuid
@@ -346,6 +347,13 @@ class BaseOrderModelTests(TestCase):
             total_cost=Decimal('10000.00')
         )
         
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the "most recent first" ordering assertion below
+        # nondeterministic. Force order1 further back to guarantee order2 is
+        # strictly newer.
+        BaseOrder.objects.filter(pk=order1.pk).update(created=timezone.now() - timedelta(seconds=5))
+
         order2 = BaseOrder.objects.create(
             user=self.user,
             first_name='Jane',
@@ -354,7 +362,7 @@ class BaseOrderModelTests(TestCase):
             phone_number='08087654321',
             total_cost=Decimal('20000.00')
         )
-        
+
         orders = list(BaseOrder.objects.all())
         self.assertEqual(orders[0].id, order2.id)  # Most recent first
         self.assertEqual(orders[1].id, order1.id)

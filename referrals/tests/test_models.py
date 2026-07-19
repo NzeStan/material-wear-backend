@@ -9,12 +9,14 @@ Covers:
 
 import uuid
 import string
+from datetime import timedelta
 from unittest.mock import patch, MagicMock, PropertyMock
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.db.utils import DataError
+from django.utils import timezone
 
 from referrals.models import ReferrerProfile, PromotionalMedia, generate_referral_code
 
@@ -178,6 +180,16 @@ class ReferrerProfileCreationTests(TestCase):
         p1 = make_profile(self.user)
         p2 = make_profile(user2)
         p3 = make_profile(user3)
+
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the ordering assertions below nondeterministic. Force
+        # explicit, strictly increasing timestamps.
+        now = timezone.now()
+        ReferrerProfile.objects.filter(pk=p1.pk).update(created_at=now - timedelta(seconds=10))
+        ReferrerProfile.objects.filter(pk=p2.pk).update(created_at=now - timedelta(seconds=5))
+        ReferrerProfile.objects.filter(pk=p3.pk).update(created_at=now)
+
         profiles = list(ReferrerProfile.objects.all())
         # newest created first
         self.assertEqual(profiles[0].pk, p3.pk)

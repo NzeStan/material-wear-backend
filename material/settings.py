@@ -423,7 +423,18 @@ STORAGES = {
         "BACKEND": "material.storage_backends.SeekableMediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # Manifest storage requires `collectstatic` to have been run (it needs
+        # staticfiles.json for cache-busted filenames), which local dev/test
+        # runs have no reason to require — that manifest is a production
+        # concern for serving hashed assets behind whitenoise. Without this
+        # split, `manage.py test` fails on any view that renders Django admin
+        # templates (e.g. {% static 'admin/css/base.css' %}) unless
+        # collectstatic was manually run first.
+        "BACKEND": (
+            "whitenoise.storage.CompressedManifestStaticFilesStorage"
+            if not DEBUG
+            else "django.contrib.staticfiles.storage.StaticFilesStorage"
+        ),
     },
 }
 

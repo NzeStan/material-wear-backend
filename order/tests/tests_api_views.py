@@ -13,6 +13,8 @@ from decimal import Decimal
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from django.utils import timezone
+from datetime import timedelta
 from rest_framework.test import APIClient
 from rest_framework import status
 from unittest.mock import patch, Mock
@@ -975,6 +977,11 @@ class OrderViewSetListTests(TestCase):
             total_cost=Decimal("10000.00"),
         )
 
+        # Force order1 further back — auto_now_add can produce identical
+        # timestamps for objects created back-to-back on this platform,
+        # which would make the "most recent first" assertion nondeterministic.
+        BaseOrder.objects.filter(pk=order1.pk).update(created=timezone.now() - timedelta(seconds=5))
+
         order2 = BaseOrder.objects.create(
             user=self.user1,
             first_name="John",
@@ -1280,3 +1287,172 @@ class OrderViewSetPolymorphicTests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
+
+
+class OrderViewSetRetryPaymentTests(TestCase):
+    """
+    Test the retry-payment action, used when a checkout's initial Paystack
+    call fails (503) or when a user comes back later to pay for an order
+    that's still unpaid. Unlike /api/payment/initiate/, this addresses an
+    order by its own ID instead of relying on session state.
+    """
+
+    def setUp(self):
+        self.client = APIClient()
+        self.user1 = User.objects.create_user(
+            username="user1", email="user1@example.com", password="testpass123"
+        )
+        self.user2 = User.objects.create_user(
+            username="user2", email="user2@example.com", password="testpass123"
+        )
+
+    def _retry_url(self, order):
+        return reverse("order:order-retry-payment", kwargs={"pk": order.id})
+
+    def test_retry_payment_requires_authentication(self):
+        order = BaseOrder.objects.create(
+            user=self.user1,
+            first_name="John",
+            last_name="Doe",
+            email="john@example.com",
+            phone_number="08012345678",
+            total_cost=Decimal("10000.00"),
+        )
+
+        response = self.client.post(self._retry_url(order), {}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_cannot_retry_payment_for_other_users_order(self):
+        order = BaseOrder.objects.create(
+            user=self.user2,
+            first_name="Jane",
+            last_name="Smith",
+            email="jane@example.com",
+            phone_number="08087654321",
+            total_cost=Decimal("20000.00"),
+        )
+
+        self.client.force_authenticate(user=self.user1)
+        response = self.client.post(self._retry_url(order), {}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_retry_payment_rejects_already_paid_order(self):
+        order = BaseOrder.objects.create(
+            user=self.user1,
+            first_name="John",
+            last_name="Doe",
+            email="john@example.com",
+            phone_number="08012345678",
+            total_cost=Decimal("10000.00"),
+            paid=True,
+        )
+
+        self.client.force_authenticate(user=self.user1)
+        response = self.client.post(self._retry_url(order), {}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn("error", response.data)
+
+    @patch("order.api_views.initialize_payment")
+    def test_retry_payment_creates_new_transaction_and_returns_url(
+        self, mock_initialize_payment
+    ):
+        mock_initialize_payment.return_value = {
+            "status": True,
+            "data": {
+                "authorization_url": "https://checkout.paystack.com/retry-test",
+                "access_code": "retry_access_code",
+                "reference": "MATERIAL-RETRYTEST",
+            },
+        }
+
+        order = BaseOrder.objects.create(
+            user=self.user1,
+            first_name="John",
+            last_name="Doe",
+            email="john@example.com",
+            phone_number="08012345678",
+            total_cost=Decimal("10000.00"),
+        )
+
+        from payment.models import PaymentTransaction
+
+        self.assertEqual(PaymentTransaction.objects.count(), 0)
+
+        self.client.force_authenticate(user=self.user1)
+        response = self.client.post(self._retry_url(order), {}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data["payment_url"], "https://checkout.paystack.com/retry-test"
+        )
+        self.assertEqual(
+            response.data["authorization_url"],
+            "https://checkout.paystack.com/retry-test",
+        )
+        self.assertIn("reference", response.data)
+
+        # A brand new PaymentTransaction should be created and linked to the order
+        self.assertEqual(PaymentTransaction.objects.count(), 1)
+        payment = PaymentTransaction.objects.first()
+        self.assertEqual(list(payment.orders.all()), [order])
+        self.assertEqual(payment.status, "pending")
+
+        # Callback should default to the product-checkout verify page, not
+        # /payment/verify (which is the unrelated bulk-orders verify flow)
+        _, call_kwargs = mock_initialize_payment.call_args
+        self.assertTrue(call_kwargs["callback_url"].endswith("/checkout/verify"))
+
+    @patch("order.api_views.initialize_payment")
+    def test_retry_payment_uses_provided_callback_url(self, mock_initialize_payment):
+        mock_initialize_payment.return_value = {
+            "status": True,
+            "data": {
+                "authorization_url": "https://checkout.paystack.com/retry-test",
+                "access_code": "retry_access_code",
+                "reference": "MATERIAL-RETRYTEST",
+            },
+        }
+
+        order = BaseOrder.objects.create(
+            user=self.user1,
+            first_name="John",
+            last_name="Doe",
+            email="john@example.com",
+            phone_number="08012345678",
+            total_cost=Decimal("10000.00"),
+        )
+
+        self.client.force_authenticate(user=self.user1)
+        response = self.client.post(
+            self._retry_url(order),
+            {"callback_url": "https://example.com/custom-callback"},
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        _, call_kwargs = mock_initialize_payment.call_args
+        self.assertEqual(
+            call_kwargs["callback_url"], "https://example.com/custom-callback"
+        )
+
+    @patch("order.api_views.initialize_payment")
+    def test_retry_payment_handles_paystack_failure(self, mock_initialize_payment):
+        mock_initialize_payment.return_value = {"status": False, "data": {}}
+
+        order = BaseOrder.objects.create(
+            user=self.user1,
+            first_name="John",
+            last_name="Doe",
+            email="john@example.com",
+            phone_number="08012345678",
+            total_cost=Decimal("10000.00"),
+        )
+
+        self.client.force_authenticate(user=self.user1)
+        response = self.client.post(self._retry_url(order), {}, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_503_SERVICE_UNAVAILABLE)
+        self.assertIn("error", response.data)

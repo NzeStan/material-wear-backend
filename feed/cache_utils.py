@@ -16,7 +16,11 @@ class VideoCache:
     def get_cached_videos(self):
         try:
             if self.cache_file.exists():
-                with open(self.cache_file, "r") as f:
+                # Explicit encoding: without it, open() falls back to the
+                # OS locale encoding, which mangles non-ASCII video titles
+                # (CJK, Arabic, emoji) on platforms where that isn't UTF-8
+                # (e.g. Windows' default cp1252).
+                with open(self.cache_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     return data.get("videos", [])
             return None
@@ -25,13 +29,13 @@ class VideoCache:
 
     def update_cache(self, videos):
         data = {"last_updated": datetime.now().isoformat(), "videos": videos}
-        with open(self.cache_file, "w") as f:
+        with open(self.cache_file, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
     def get_last_updated(self):
         try:
             if self.cache_file.exists():
-                with open(self.cache_file, "r") as f:
+                with open(self.cache_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     return data.get("last_updated")
             return None

@@ -8,6 +8,7 @@ from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.utils.text import slugify
+from datetime import timedelta
 from decimal import Decimal
 from products.models import Category, NyscKit, NyscTour, Church, BaseProduct
 from products.constants import (
@@ -231,8 +232,13 @@ class NyscKitModelTest(TestCase):
         self.assertIsNotNone(self.nysc_kit.created)
         self.assertIsNotNone(self.nysc_kit.updated)
 
-        # Update and check timestamp changes
-        old_updated = self.nysc_kit.updated
+        # Update and check timestamp changes.
+        # auto_now can produce identical timestamps for saves executed
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make assertGreater below nondeterministic. Force the prior
+        # timestamp further back so the follow-up save is guaranteed newer.
+        old_updated = timezone.now() - timedelta(seconds=5)
+        NyscKit.objects.filter(pk=self.nysc_kit.pk).update(updated=old_updated)
         self.nysc_kit.price = Decimal("6000.00")
         self.nysc_kit.save()
         self.assertGreater(self.nysc_kit.updated, old_updated)

@@ -239,6 +239,10 @@ class LiveFormLinkMetaTest(TestCase):
 
     def test_default_ordering_is_newest_first(self):
         old = make_form(self.user, organization_name="Old Org")
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the "newest first" assertion below nondeterministic.
+        LiveFormLink.objects.filter(pk=old.pk).update(created_at=timezone.now() - timedelta(seconds=5))
         new = make_form(self.user, organization_name="New Org")
         forms = list(LiveFormLink.objects.filter(created_by=self.user))
         self.assertEqual(forms[0].pk, new.pk)

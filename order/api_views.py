@@ -18,7 +18,7 @@ from .serializers import (
 )
 from drf_spectacular.utils import extend_schema, extend_schema_view, OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
-from material.throttling import CheckoutRateThrottle
+from material.throttling import CheckoutRateThrottle, PaymentRateThrottle
 from decimal import Decimal
 from cart.cart import Cart
 from material.background_utils import (
@@ -462,4 +462,80 @@ class OrderViewSet(viewsets.ReadOnlyModelViewSet):
 
         return Response(
             {"order": serializer.data, "receipt_available": True, "paid": order.paid}
+        )
+
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="retry-payment",
+        throttle_classes=[PaymentRateThrottle],
+    )
+    def retry_payment(self, request, pk=None):
+        """
+        Re-initialize Paystack payment for this specific unpaid order.
+
+        Unlike /api/payment/initiate/ (which replays whatever `pending_orders`
+        happens to be sitting in the current Django session — fine right after
+        a failed checkout, but unreliable if the session has since been
+        overwritten by a later checkout, expired, or the user switched
+        devices), this works from any authenticated session as long as the
+        order belongs to the requesting user and is still unpaid. A fresh
+        PaymentTransaction is created each retry since Paystack references
+        must be unique per initialization.
+        """
+        order = self.get_object()
+
+        if order.paid:
+            return Response(
+                {"error": "This order has already been paid for."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        vat_breakdown = get_vat_breakdown(order.total_cost)
+        total_amount = vat_breakdown["total_amount"]
+
+        payment = PaymentTransaction.objects.create(
+            amount=total_amount, email=order.email
+        )
+        payment.orders.set([order])
+
+        callback_url = (
+            request.data.get("callback_url")
+            or f"{settings.FRONTEND_URL}/checkout/verify"
+        )
+
+        paystack_response = initialize_payment(
+            amount=payment.amount,
+            email=payment.email,
+            reference=payment.reference,
+            callback_url=callback_url,
+            metadata={
+                "orders": [str(order.id)],
+                "customer_name": f"{order.first_name} {order.last_name}",
+                "user_id": str(request.user.id),
+                "subtotal": float(order.total_cost),
+                "vat_amount": float(vat_breakdown["vat_amount"]),
+                "vat_rate": vat_breakdown["vat_rate"],
+            },
+        )
+
+        if not paystack_response or not paystack_response.get("status"):
+            logger.error(
+                f"Retry payment initialization failed for order {order.id}, "
+                f"user {request.user.id}"
+            )
+            return Response(
+                {"error": "Could not initialize payment. Please try again."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+
+        return Response(
+            {
+                "reference": payment.reference,
+                "authorization_url": paystack_response["data"]["authorization_url"],
+                "access_code": paystack_response["data"]["access_code"],
+                "payment_url": paystack_response["data"]["authorization_url"],
+                "amount": float(payment.amount),
+            },
+            status=status.HTTP_200_OK,
         )

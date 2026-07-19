@@ -29,6 +29,8 @@ from django.contrib.admin.sites import AdminSite
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
 from django.urls import reverse
+from django.utils import timezone
+from datetime import timedelta
 
 from accounts.admin import CustomUserAdmin
 
@@ -234,11 +236,17 @@ class OrderingTests(TestCase):
             email='user2@example.com',
             password='test123'
         )
-        
+
+        # date_joined uses default=timezone.now, which can produce identical
+        # values for objects created back-to-back (observed on this
+        # platform's clock resolution), making the ordering assertion below
+        # nondeterministic. Force user1 further back in time.
+        User.objects.filter(pk=user1.pk).update(date_joined=timezone.now() - timedelta(seconds=5))
+
         # Get queryset with admin ordering
         queryset = self.admin.get_queryset(RequestFactory().get('/'))
         users = list(queryset)
-        
+
         # Most recent should be first
         self.assertEqual(users[0].username, 'user2')
         self.assertEqual(users[1].username, 'user1')
@@ -509,9 +517,15 @@ class AdminQuerysetTests(TestCase):
 
     def test_get_queryset_ordered_correctly(self):
         """Test get_queryset applies ordering"""
+        # date_joined uses default=timezone.now, which can produce identical
+        # values for objects created back-to-back in setUp (observed on this
+        # platform's clock resolution), making the ordering assertion below
+        # nondeterministic. Force user1 further back in time.
+        User.objects.filter(pk=self.user1.pk).update(date_joined=timezone.now() - timedelta(seconds=5))
+
         request = self.factory.get('/')
         queryset = self.admin.get_queryset(request)
-        
+
         users = list(queryset)
         # Should be ordered by -date_joined (most recent first)
         self.assertEqual(users[0], self.user2)

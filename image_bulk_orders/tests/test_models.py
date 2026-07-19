@@ -246,7 +246,15 @@ class ImageBulkOrderLinkModelTest(TestCase):
             payment_deadline=self.future_deadline,
             created_by=self.user
         )
-        
+
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the ordering assertions below nondeterministic. Force
+        # bulk_order1 further back in time.
+        ImageBulkOrderLink.objects.filter(pk=bulk_order1.pk).update(
+            created_at=timezone.now() - timedelta(seconds=5)
+        )
+
         all_orders = list(ImageBulkOrderLink.objects.all())
         self.assertEqual(all_orders[0].id, bulk_order2.id)
         self.assertEqual(all_orders[1].id, bulk_order1.id)

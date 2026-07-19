@@ -516,6 +516,25 @@ class ImageCouponCodeViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    @action(detail=True, methods=["post"])
+    def validate_coupon(self, request, pk=None):
+        """Validate if a coupon is valid and unused"""
+        coupon = self.get_object()
+
+        if coupon.is_used:
+            return Response(
+                {"valid": False, "message": "This coupon has already been used."}
+            )
+
+        return Response(
+            {
+                "valid": True,
+                "code": coupon.code,
+                "bulk_order": coupon.bulk_order.organization_name,
+                "bulk_order_slug": coupon.bulk_order.slug,
+            }
+        )
+
 
 # ============================================================================
 # WEBHOOK HANDLER (Routes through webhook_router)

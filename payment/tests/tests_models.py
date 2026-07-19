@@ -723,6 +723,15 @@ class PaymentTransactionOrderingTests(TestCase):
             amount=Decimal("15000.00"), email="third@example.com"
         )
 
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the ordering assertions below nondeterministic. Force
+        # explicit, strictly increasing timestamps.
+        now = timezone.now()
+        PaymentTransaction.objects.filter(pk=payment1.pk).update(created=now - timedelta(seconds=10))
+        PaymentTransaction.objects.filter(pk=payment2.pk).update(created=now - timedelta(seconds=5))
+        PaymentTransaction.objects.filter(pk=payment3.pk).update(created=now)
+
         # Fetch all payments
         payments = list(PaymentTransaction.objects.all())
 

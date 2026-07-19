@@ -316,7 +316,12 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING("    Image too large (>10MB)"))
                 return None
 
-            tmp = NamedTemporaryFile(delete=True)
+            # django.core.files.temp.NamedTemporaryFile on Windows is a custom
+            # class that always deletes on close and doesn't accept `delete`
+            # (or `buffering`/`encoding`/`newline`) at all — passing it raises
+            # TypeError there. POSIX's tempfile.NamedTemporaryFile defaults to
+            # delete=True anyway, so omitting it is a no-op there too.
+            tmp = NamedTemporaryFile()
             for chunk in resp.iter_content(8192):
                 tmp.write(chunk)
             tmp.flush()

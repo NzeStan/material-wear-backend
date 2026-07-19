@@ -64,6 +64,18 @@ class BaseProductAdmin(admin.ModelAdmin):
         if obj:  # Editing existing object
             fields.append('slug')
         return fields
+
+    def get_prepopulated_fields(self, request, obj=None):
+        """
+        Don't prepopulate slug once it's readonly (existing objects) — Django
+        excludes readonly fields from the form entirely, so leaving slug in
+        prepopulated_fields for the change view raises a KeyError when the
+        admin tries to wire up the prepopulate JS against a field that isn't
+        part of the form.
+        """
+        if obj:  # Editing existing object
+            return {}
+        return self.prepopulated_fields
     
     def thumbnail_preview(self, obj):
         """Display thumbnail in list view"""

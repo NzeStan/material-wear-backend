@@ -55,6 +55,8 @@ Test Coverage:
 from django.test import TestCase, RequestFactory, override_settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from django.utils import timezone
+from datetime import timedelta
 from rest_framework.test import APIClient, APITestCase, force_authenticate
 from rest_framework import status
 from unittest.mock import patch, Mock, MagicMock
@@ -821,6 +823,14 @@ class PaymentTransactionViewSetTests(APITestCase):
 
     def test_list_payments_ordering(self):
         """Test that payments are ordered by created DESC (newest first)"""
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the "newest first" assertion below nondeterministic.
+        # Force self.payment1 (created in setUp) further back in time.
+        PaymentTransaction.objects.filter(pk=self.payment1.pk).update(
+            created=timezone.now() - timedelta(seconds=10)
+        )
+
         # Create another payment for user1
         payment3 = PaymentTransaction.objects.create(
             reference="MATERIAL-USER1-NEW",

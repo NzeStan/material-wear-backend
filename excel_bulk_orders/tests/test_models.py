@@ -408,6 +408,15 @@ class ExcelBulkOrderModelTest(TestCase):
             price_per_participant=Decimal('5000.00')
         )
 
+        # auto_now_add can produce identical timestamps for objects created
+        # back-to-back (observed on this platform's clock resolution), which
+        # would make the ordering assertions below nondeterministic. Force
+        # explicit, strictly increasing timestamps.
+        now = timezone.now()
+        ExcelBulkOrder.objects.filter(pk=order1.pk).update(created_at=now - timedelta(seconds=10))
+        ExcelBulkOrder.objects.filter(pk=order2.pk).update(created_at=now - timedelta(seconds=5))
+        ExcelBulkOrder.objects.filter(pk=order3.pk).update(created_at=now)
+
         orders = list(ExcelBulkOrder.objects.all())
         self.assertEqual(orders[0], order3)  # Most recent first
         self.assertEqual(orders[1], order2)

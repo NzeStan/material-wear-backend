@@ -85,3 +85,7 @@ phonenumbers==8.13.29
 django-testimonials==1.0.1
 
 psycopg2==2.9.11
+
+# Testing (academic_directory's test suite is pytest-style — see pytest.ini)
+pytest==9.1.1
+pytest-django==4.12.0

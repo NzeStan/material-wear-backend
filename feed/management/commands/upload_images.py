@@ -246,8 +246,13 @@ class Command(BaseCommand):
             if not filename or "." not in filename:
                 filename = "image.jpg"
 
-            # Create temporary file
-            img_temp = NamedTemporaryFile(delete=True)
+            # Create temporary file.
+            # django.core.files.temp.NamedTemporaryFile on Windows is a custom
+            # class that always deletes on close and doesn't accept `delete`
+            # (or `buffering`/`encoding`/`newline`) at all — passing it raises
+            # TypeError there. POSIX's tempfile.NamedTemporaryFile defaults to
+            # delete=True anyway, so omitting it is a no-op there too.
+            img_temp = NamedTemporaryFile()
 
             # Download in chunks
             for chunk in response.iter_content(chunk_size=8192):

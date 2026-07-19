@@ -475,20 +475,64 @@ class ImageCouponCodeViewSetTest(APITestCase):
     def test_list_coupons_requires_admin(self):
         """Test that listing coupons requires admin"""
         url = reverse('image_bulk_orders:coupon-list')
-        
+
         # Unauthenticated
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        
+
         # Regular user
         self.client.force_authenticate(user=self.user)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        
+
         # Admin user
         self.client.force_authenticate(user=self.admin_user)
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_validate_coupon_admin_access(self):
+        """Test that admins can validate coupons"""
+        coupon = ImageCouponCode.objects.create(
+            bulk_order=self.bulk_order,
+            code='VALIDATE123'
+        )
+
+        self.client.force_authenticate(user=self.admin_user)
+        url = reverse('image_bulk_orders:coupon-validate-coupon', kwargs={'pk': coupon.id})
+        response = self.client.post(url, {}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue(response.data['valid'])
+        self.assertEqual(response.data['code'], 'VALIDATE123')
+        self.assertEqual(response.data['bulk_order_slug'], self.bulk_order.slug)
+
+    def test_validate_coupon_requires_admin(self):
+        """Test that regular users cannot validate coupons"""
+        coupon = ImageCouponCode.objects.create(
+            bulk_order=self.bulk_order,
+            code='ADMINONLY'
+        )
+
+        self.client.force_authenticate(user=self.user)
+        url = reverse('image_bulk_orders:coupon-validate-coupon', kwargs={'pk': coupon.id})
+        response = self.client.post(url, {}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_validate_coupon_already_used(self):
+        """Test validating a coupon that has already been used"""
+        coupon = ImageCouponCode.objects.create(
+            bulk_order=self.bulk_order,
+            code='USEDCODE',
+            is_used=True
+        )
+
+        self.client.force_authenticate(user=self.admin_user)
+        url = reverse('image_bulk_orders:coupon-validate-coupon', kwargs={'pk': coupon.id})
+        response = self.client.post(url, {}, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertFalse(response.data['valid'])
 
 
 class ImageBulkOrderPaymentWebhookTest(TransactionTestCase):

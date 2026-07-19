@@ -17,6 +17,7 @@ Coverage:
 - Edge cases and security
 """
 from decimal import Decimal
+from datetime import timedelta
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
@@ -1897,12 +1898,18 @@ class PDFGenerationSecurityTests(TestCase):
         
         order.refresh_from_db()
         self.assertEqual(order.generated_by, self.staff_user)
-        first_generated_at = order.generated_at
-        
+
+        # The view sets generated_at via timezone.now(), which can produce
+        # identical timestamps for requests handled back-to-back (observed
+        # on this platform's clock resolution), making assertGreater below
+        # nondeterministic. Force it further back in time.
+        first_generated_at = timezone.now() - timedelta(seconds=5)
+        NyscKitOrder.objects.filter(pk=order.pk).update(generated_at=first_generated_at)
+
         # Regenerate with second staff
         self.client.force_login(staff2)
         self.client.get(url, {'state': 'Lagos', 'regenerate': 'true'})
-        
+
         order.refresh_from_db()
         self.assertEqual(order.generated_by, staff2)
         # Generated_at should be updated
