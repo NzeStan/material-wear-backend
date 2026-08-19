@@ -1,6 +1,11 @@
 # Core Django
 Django==5.1.3
-psycopg2-binary==2.9.10
+# psycopg3's binary wheel bundles libpq far more reliably in minimal
+# container images than psycopg2-binary's does (that's what was crashing
+# the Railway deploy — libpq.so.5 missing at runtime). Django's postgresql
+# backend already tries `import psycopg` (v3) before falling back to
+# psycopg2, so this needs no settings.py change to take effect.
+psycopg[binary]>=3.2,<4.0
 
 # Django Extensions
 django-extensions==3.2.3
