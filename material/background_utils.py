@@ -21,7 +21,13 @@ logger = logging.getLogger(__name__)
 
 
 def send_email_async(
-    subject, message, from_email, recipient_list, attachments=None, html_message=None
+    subject,
+    message,
+    from_email,
+    recipient_list,
+    attachments=None,
+    html_message=None,
+    reply_to=None,
 ):
     """
     Send email asynchronously using threading.
@@ -34,15 +40,20 @@ def send_email_async(
         recipient_list: List of recipient emails
         attachments: Optional list of (filename, content, mimetype) tuples
         html_message: Optional HTML version of message
+        reply_to: Optional list of addresses replies should go to. Useful when
+            the From: is a noreply@ alias but a human reply should reach
+            someone real (e.g. a contact form notification replying to the
+            customer who sent it).
     """
 
     def _send():
         try:
+            body = html_message if html_message else message
+            email = EmailMessage(
+                subject, body, from_email, recipient_list, reply_to=reply_to or None
+            )
             if html_message:
-                email = EmailMessage(subject, html_message, from_email, recipient_list)
                 email.content_subtype = "html"
-            else:
-                email = EmailMessage(subject, message, from_email, recipient_list)
 
             if attachments:
                 for filename, content, mimetype in attachments:
@@ -165,7 +176,7 @@ def generate_order_confirmation_pdf_task(order_id):
             subject=subject,
             message=message,
             html_message=html_message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.ORDER_FROM_EMAIL,
             recipient_list=[order.email],
             attachments=[(filename, pdf_bytes, "application/pdf")],
         )
@@ -270,7 +281,7 @@ def generate_payment_receipt_pdf_task(payment_id):
             subject=subject,
             message=message,
             html_message=html_message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.PAYMENT_FROM_EMAIL,
             recipient_list=[payment.email],
             attachments=[(filename, pdf_bytes, "application/pdf")],
         )
@@ -308,7 +319,7 @@ def send_order_confirmation_email(order_entry):
         subject=subject,
         message=f"Thank you for your order! Your order number is #{order_entry.serial_number}",
         html_message=html_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=settings.ORDER_FROM_EMAIL,
         recipient_list=[order_entry.email],
     )
 
@@ -332,7 +343,7 @@ def send_payment_receipt_email(order_entry):
         subject=subject,
         message=f"Payment received for order #{order_entry.serial_number}",
         html_message=html_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=settings.PAYMENT_FROM_EMAIL,
         recipient_list=[order_entry.email],
     )
 
@@ -356,7 +367,7 @@ def generate_bulk_order_pdf_task(bulk_order_id, recipient_email):
         send_email_async(
             subject=subject,
             message=message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.BULK_FROM_EMAIL,
             recipient_list=[recipient_email],
             attachments=[(f"bulk_order_{bulk_order.slug}.pdf", pdf, "application/pdf")],
         )
@@ -402,7 +413,7 @@ def generate_payment_receipt_pdf_task_bulk(order_entry_id):
         send_email_async(
             subject=subject,
             message=message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.PAYMENT_FROM_EMAIL,
             recipient_list=[order_entry.email],
             attachments=[
                 (f"receipt_{order_entry.serial_number}.pdf", pdf, "application/pdf")
@@ -768,7 +779,7 @@ def send_image_order_confirmation_email(order_entry):
         subject=subject,
         message=f"Thank you for your order! Your order number is #{order_entry.serial_number}",
         html_message=html_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=settings.ORDER_FROM_EMAIL,
         recipient_list=[order_entry.email],
     )
 
@@ -795,7 +806,7 @@ def send_image_payment_receipt_email(order_entry):
         subject=subject,
         message=f"Payment received for order #{order_entry.serial_number}",
         html_message=html_message,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=settings.PAYMENT_FROM_EMAIL,
         recipient_list=[order_entry.email],
     )
 
@@ -836,7 +847,7 @@ def generate_image_payment_receipt_pdf_task(order_entry_id):
         send_email_async(
             subject=subject,
             message=message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.PAYMENT_FROM_EMAIL,
             recipient_list=[order_entry.email],
             attachments=[
                 (f"receipt_{order_entry.serial_number}.pdf", pdf, "application/pdf")
@@ -902,7 +913,7 @@ def send_live_form_submission_email_async(entry_id):
             send_email_async(
                 subject=subject,
                 message=f"Your entry #{entry.serial_number} has been received.",
-                from_email=settings.DEFAULT_FROM_EMAIL,
+                from_email=settings.BULK_FROM_EMAIL,
                 recipient_list=[email],
                 html_message=html_message,
             )
@@ -979,7 +990,7 @@ def generate_live_form_report_task(live_form_id, recipient_email):
         send_email_async(
             subject=subject,
             message=message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
+            from_email=settings.BULK_FROM_EMAIL,
             recipient_list=[recipient_email],
             attachments=[
                 (

@@ -100,6 +100,7 @@ import csv
 import tempfile
 import requests
 import os
+from pathlib import Path
 
 
 # Helper function to create valid image bytes
@@ -169,13 +170,26 @@ class UploadImagesCommandExistenceTests(TestCase):
             os.unlink(csv_path)
 
     def test_command_arguments_configured(self):
-        """Test command has required arguments"""
+        """csv_file is optional at the parser level (--folder is the other
+        valid source) — parse_args([]) now succeeds with both unset. The
+        "must provide exactly one" rule is enforced in handle() instead,
+        covered by test_handle_requires_exactly_one_source below."""
         command = Command()
         parser = command.create_parser("manage.py", "upload_images")
 
-        # Should require csv_file argument
+        args = parser.parse_args([])
+        self.assertIsNone(args.csv_file)
+        self.assertIsNone(args.folder)
+
+    def test_handle_requires_exactly_one_source(self):
+        """Running with neither a CSV path nor --folder should fail."""
         with self.assertRaises(CommandError):
-            parser.parse_args([])
+            call_command("upload_images")
+
+    def test_handle_rejects_both_sources_together(self):
+        """Running with both a CSV path and --folder should fail."""
+        with self.assertRaises(CommandError):
+            call_command("upload_images", "test.csv", folder="some/folder")
 
     def test_dry_run_argument_optional(self):
         """Test --dry-run argument is optional"""
@@ -1798,3 +1812,81 @@ class HelperMethodTests(TestCase):
             command._process_image(row, dry_run=False)
 
         self.assertIn("cannot be empty", str(cm.exception))
+
+
+# ============================================================================
+# LOCAL FOLDER UPLOAD TESTS
+# ============================================================================
+
+
+class UploadImagesFolderModeTests(TestCase):
+    """Test --folder as an alternative source to the CSV path"""
+
+    def _make_folder_with_images(self, filenames):
+        tmp_dir = tempfile.mkdtemp()
+        for name in filenames:
+            with open(os.path.join(tmp_dir, name), "wb") as f:
+                f.write(create_valid_image_bytes())
+        return tmp_dir
+
+    def test_folder_and_csv_are_mutually_exclusive(self):
+        with self.assertRaises(CommandError):
+            call_command("upload_images", "test.csv", folder="some/folder")
+
+    def test_neither_csv_nor_folder_raises(self):
+        with self.assertRaises(CommandError):
+            call_command("upload_images")
+
+    def test_nonexistent_folder_raises(self):
+        with self.assertRaises(CommandError) as cm:
+            call_command("upload_images", folder="/path/does/not/exist")
+        self.assertIn("not found", str(cm.exception).lower())
+
+    def test_folder_with_no_images_raises(self):
+        tmp_dir = tempfile.mkdtemp()
+        with self.assertRaises(CommandError) as cm:
+            call_command("upload_images", folder=tmp_dir)
+        self.assertIn("no image files", str(cm.exception).lower())
+
+    def test_folder_dry_run_creates_no_records(self):
+        tmp_dir = self._make_folder_with_images(["a.jpg", "b.png"])
+        out = StringIO()
+        call_command("upload_images", folder=tmp_dir, dry_run=True, stdout=out)
+        self.assertEqual(Image.objects.count(), 0)
+        self.assertIn("DRY RUN", out.getvalue())
+
+    def test_folder_upload_creates_active_records(self):
+        tmp_dir = self._make_folder_with_images(["a.jpg", "b.png", "c.webp"])
+        out = StringIO()
+        call_command("upload_images", folder=tmp_dir, stdout=out)
+        self.assertEqual(Image.objects.count(), 3)
+        self.assertTrue(all(img.active for img in Image.objects.all()))
+
+    def test_folder_ignores_non_image_files(self):
+        tmp_dir = self._make_folder_with_images(["a.jpg"])
+        with open(os.path.join(tmp_dir, "notes.txt"), "w") as f:
+            f.write("not an image")
+        out = StringIO()
+        call_command("upload_images", folder=tmp_dir, stdout=out)
+        self.assertEqual(Image.objects.count(), 1)
+
+    def test_rerunning_same_folder_creates_duplicates(self):
+        """Documented behavior: no dedup, matching the CSV path."""
+        tmp_dir = self._make_folder_with_images(["a.jpg"])
+        call_command("upload_images", folder=tmp_dir, stdout=StringIO())
+        call_command("upload_images", folder=tmp_dir, stdout=StringIO())
+        self.assertEqual(Image.objects.count(), 2)
+
+    def test_oversized_local_file_reported_as_error_not_crash(self):
+        tmp_dir = tempfile.mkdtemp()
+        path = os.path.join(tmp_dir, "huge.jpg")
+        with open(path, "wb") as f:
+            f.write(create_valid_image_bytes())
+
+        command = Command()
+        command.stdout = StringIO()
+        with patch("pathlib.Path.stat") as mock_stat:
+            mock_stat.return_value = Mock(st_size=11 * 1024 * 1024)
+            with self.assertRaises(ValueError) as cm:
+                command._create_image_from_local_file(Path(path), dry_run=False)
+        self.assertIn("too large", str(cm.exception).lower())

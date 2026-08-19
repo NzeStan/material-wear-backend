@@ -68,6 +68,7 @@ urlpatterns = [
     ),
     path("api/testimonials/", include("testimonials.api.urls")),
     path("api/live_forms/", include("live_forms.urls")),
+    path("api/contact/", include("contact.urls", namespace="contact")),
 ]
 if settings.DEBUG:
     import debug_toolbar

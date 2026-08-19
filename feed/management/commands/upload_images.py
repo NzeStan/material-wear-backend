@@ -1,6 +1,7 @@
 # feed/management/commands/upload_images.py
 """
-Management command to upload images to feed from CSV file
+Management command to upload images to feed, from either a CSV of URLs or
+a local folder of image files.
 
 CSV Format:
 -----------
@@ -14,16 +15,27 @@ Supported URLs:
 ✅ External URLs (http/https): Downloaded and uploaded to Cloudinary
 ✅ Cloudinary URLs: Reused by public_id (NO duplication!)
 
+Local folder mode:
+-------------------
+Every .jpg/.jpeg/.png/.webp/.gif file directly inside the given folder
+(not recursive) is uploaded to Cloudinary and saved as active=True. Re-running
+against the same folder creates new rows each time — same as the CSV path,
+which doesn't dedupe either — so don't re-run on a folder you've already
+uploaded unless you want duplicates.
+
 Usage:
 ------
 python manage.py upload_images path/to/images.csv
 python manage.py upload_images path/to/images.csv --dry-run
+python manage.py upload_images --folder path/to/local/images
+python manage.py upload_images --folder path/to/local/images --dry-run
 """
 
 import csv
 import requests
 import logging
 import re
+from pathlib import Path
 from django.core.management.base import BaseCommand, CommandError
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -32,12 +44,23 @@ from feed.models import Image
 
 logger = logging.getLogger(__name__)
 
+IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
+MAX_IMAGE_BYTES = 10 * 1024 * 1024
+
 
 class Command(BaseCommand):
-    help = "Upload images from CSV file to feed app"
+    help = "Upload images to the feed app, from a CSV of URLs or a local folder"
 
     def add_arguments(self, parser):
-        parser.add_argument("csv_file", type=str, help="Path to CSV file")
+        parser.add_argument(
+            "csv_file", type=str, nargs="?", default=None, help="Path to CSV file"
+        )
+        parser.add_argument(
+            "--folder",
+            type=str,
+            default=None,
+            help="Path to a local folder of images to upload directly to Cloudinary",
+        )
         parser.add_argument(
             "--dry-run",
             action="store_true",
@@ -46,17 +69,27 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         csv_file = options["csv_file"]
+        folder = options["folder"]
         dry_run = options["dry_run"]
+
+        if bool(csv_file) == bool(folder):
+            raise CommandError(
+                "Provide exactly one of: a CSV file path, or --folder <path>"
+            )
 
         # Header
         self.stdout.write(self.style.SUCCESS("=" * 80))
         self.stdout.write(self.style.SUCCESS("  MATERIAL ACCESSORIES - IMAGE UPLOAD"))
         self.stdout.write(self.style.SUCCESS("=" * 80))
-        self.stdout.write(f"CSV File: {self.style.WARNING(csv_file)}")
+        self.stdout.write(f"Source: {self.style.WARNING(csv_file or f'{folder} (local folder)')}")
         if dry_run:
             self.stdout.write(
                 self.style.NOTICE("MODE: DRY RUN (No changes will be saved)\n")
             )
+
+        if folder:
+            self._handle_folder(folder, dry_run)
+            return
 
         try:
             # Read CSV
@@ -129,6 +162,83 @@ class Command(BaseCommand):
             raise CommandError("CSV file encoding error. Ensure file is UTF-8 encoded")
         except Exception as e:
             raise CommandError(f"Unexpected error: {str(e)}")
+
+    def _handle_folder(self, folder, dry_run):
+        """Upload every image file directly inside `folder` (not recursive)."""
+        folder_path = Path(folder)
+        if not folder_path.is_dir():
+            raise CommandError(f"Folder not found: {folder}")
+
+        files = sorted(
+            p
+            for p in folder_path.iterdir()
+            if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS
+        )
+
+        if not files:
+            raise CommandError(
+                f"No image files ({', '.join(sorted(IMAGE_EXTENSIONS))}) found in: {folder}"
+            )
+
+        self.stdout.write(f"Found {len(files)} images to process\n")
+
+        success_count = error_count = 0
+        errors = []
+
+        for idx, path in enumerate(files, start=1):
+            self.stdout.write(f"\n[{idx}/{len(files)}] {path.name}")
+            try:
+                with transaction.atomic():
+                    self._create_image_from_local_file(path, dry_run)
+                success_count += 1
+                self.stdout.write(
+                    self.style.SUCCESS("  (would upload)" if dry_run else "  ✓ Uploaded")
+                )
+            except Exception as e:
+                error_count += 1
+                errors.append(f"{path.name}: {str(e)}")
+                self.stdout.write(self.style.ERROR(f"  ✗ Error: {str(e)}"))
+
+        self._print_summary(len(files), success_count, error_count, errors, dry_run)
+
+    def _create_image_from_local_file(self, path, dry_run):
+        """Upload a single local file to Cloudinary as an active feed Image."""
+        size = path.stat().st_size
+        if size > MAX_IMAGE_BYTES:
+            raise ValueError(f"Image too large (>{MAX_IMAGE_BYTES // (1024 * 1024)}MB)")
+
+        if dry_run:
+            self.stdout.write(f"    Would upload: {path.name} (active=True)")
+            return
+
+        with open(path, "rb") as fh:
+            image = Image(active=True)
+            image.url = File(fh, name=path.name)
+            image.save()
+
+    def _print_summary(self, total, success_count, error_count, errors, dry_run):
+        self.stdout.write("\n" + "=" * 80)
+        self.stdout.write(self.style.SUCCESS("UPLOAD SUMMARY"))
+        self.stdout.write("=" * 80)
+        self.stdout.write(f"Total Processed: {total}")
+        self.stdout.write(self.style.SUCCESS(f"✓ Successful: {success_count}"))
+        if error_count:
+            self.stdout.write(self.style.ERROR(f"✗ Errors: {error_count}"))
+            self.stdout.write("\nError Details:")
+            for err in errors:
+                self.stdout.write(self.style.ERROR(f"  • {err}"))
+        self.stdout.write("=" * 80 + "\n")
+
+        if dry_run:
+            self.stdout.write(
+                self.style.NOTICE(
+                    "DRY RUN COMPLETE - No changes were saved to the database"
+                )
+            )
+        elif error_count == 0:
+            self.stdout.write(self.style.SUCCESS("✓ Upload completed successfully!"))
+        else:
+            self.stdout.write(self.style.WARNING("⚠ Upload completed with some errors"))
 
     def _validate_headers(self, headers):
         """Validate CSV headers"""

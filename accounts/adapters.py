@@ -25,6 +25,14 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         """Allow or restrict signup."""
         return True
 
+    def get_login_redirect_url(self, request):
+        """Where allauth's own redirect-based login flow sends the browser
+        once login succeeds and no explicit `next` was given. Used by the
+        GitHub login button, and by Google when no popup client ID is
+        configured — both customer-facing, so they belong on the storefront,
+        not LOGIN_REDIRECT_URL (the Django admin, meant for staff)."""
+        return settings.FRONTEND_URL
+
     def send_mail(self, template_prefix, email, context):
         """Custom email sending with HTML support."""
         subject = render_to_string(f"{template_prefix}_subject.txt", context)

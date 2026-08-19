@@ -30,18 +30,23 @@ FORMS_URLFIELD_ASSUME_HTTPS = True
 # ==============================================================================
 
 if DEBUG:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app"]
-    CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app"]
+    # .ngrok-free.app: ngrok tunnels. .trycloudflare.com: Cloudflare quick
+    # tunnels (used when ngrok-free.app is blocked by a network's filtering,
+    # e.g. FortiGuard) — both rotate subdomains per session, hence wildcards.
+    ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", ".trycloudflare.com"]
+    CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app", "https://*.trycloudflare.com"]
 else:
+    # .up.railway.app: wildcarded because the exact subdomain is only assigned
+    # once the Railway service is created (e.g. material-wear-production.up.railway.app)
     ALLOWED_HOSTS = [
-        "material-wear.onrender.com",
-        "www.materialwear.com",
-        "materialwear.com",
+        ".up.railway.app",
+        "www.materialwearlimited.com",
+        "materialwearlimited.com",
     ]
     CSRF_TRUSTED_ORIGINS = [
-        "https://material-wear.onrender.com",
-        "https://www.materialwear.com",
-        "https://materialwear.com",
+        "https://*.up.railway.app",
+        "https://www.materialwearlimited.com",
+        "https://materialwearlimited.com",
     ]
 
 
@@ -58,11 +63,19 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000  # 1 year
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    # Production frontend (materialwearlimited.com) and backend
+    # (material-wear.onrender.com) are different domains, so this is a
+    # cross-site relationship, same as the DEBUG+tunnel case below — but
+    # unconditional, since it's not optional in prod. "Lax" here would
+    # silently drop the session cookie on every cross-site fetch from the
+    # frontend, breaking the allauth session -> REST token bridge
+    # (SessionTokenView) that the GitHub/Google redirect login flow depends
+    # on to hand the SPA a usable auth token after login.
     SESSION_COOKIE_SECURE = True
-    SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SAMESITE = "None"
     SESSION_COOKIE_HTTPONLY = True
     CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_SAMESITE = "Lax"
+    CSRF_COOKIE_SAMESITE = "None"
     CSRF_COOKIE_HTTPONLY = True
 else:
     SECURE_SSL_REDIRECT = False
@@ -90,12 +103,17 @@ TEXT_COLOR = "#1F2937"
 
 COMPANY_NAME = "MATERIAL WEAR"
 COMPANY_SHORT_NAME = "MATERIAL"
-COMPANY_EMAIL = "contact@materialwear.com"
+# Public-facing address: shown on receipts/PDFs and used as the destination
+# for contact form submissions. This is the real monitored mailbox.
+COMPANY_EMAIL = "hello@materialwearlimited.com"
 COMPANY_PHONE = "+2348071000804"
 COMPANY_ADDRESS = "16 Emejiaka Street, Ngwa Rd, Aba Abia State"
+# Keep in sync with ASSETS.logo.main in the frontend's src/config/assets.js
+# (and its favicon/JSON-LD copies in index.html) — this is the same mark
+# used on receipts/PDFs/emails, so a mismatch shows two different logos.
 COMPANY_LOGO_URL = (
-    "https://res.cloudinary.com/dhhaiy58r/image/upload/v1721420288/"
-    "Black_White_Minimalist_Clothes_Store_Logo_e1o8ow.png"
+    "https://res.cloudinary.com/dhhaiy58r/image/upload/v1786786523/"
+    "hood_pics/material_logo_dl7qrk.png"
 )
 
 CURRENCY_SYMBOL = "₦"
@@ -103,8 +121,8 @@ CURRENCY_CODE = "NGN"
 
 WHATSAPP_NUMBER = env.str("WHATSAPP_NUMBER", default="2348071000804")
 
-SITE_URL = "http://127.0.0.1:8000" if DEBUG else "https://materialwear.com"
-FRONTEND_URL = "http://localhost:3000" if DEBUG else "https://materialwear.com"
+SITE_URL = "http://127.0.0.1:8000" if DEBUG else "https://materialwearlimited.com"
+FRONTEND_URL = "http://localhost:3000" if DEBUG else "https://materialwearlimited.com"
 
 
 # ==============================================================================
@@ -162,6 +180,7 @@ INSTALLED_APPS = [
     "academic_directory.apps.AcademicDirectoryConfig",
     "image_bulk_orders.apps.ImageBulkOrdersConfig",
     "live_forms.apps.LiveFormsConfig",
+    "contact.apps.ContactConfig",
 ]
 
 if DEBUG:
@@ -371,6 +390,14 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_VERIFICATION = "mandatory" if not DEBUG else "optional"
 
+# Were defined in accounts/adapters.py but never pointed to here, so none of
+# their logic (auto-linking a social login to an existing email/password
+# account, auto-verifying social emails, welcome emails, redirecting back to
+# the frontend after login) was actually running — allauth was silently
+# using its own defaults instead.
+ACCOUNT_ADAPTER = "accounts.adapters.CustomAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "accounts.adapters.CustomSocialAccountAdapter"
+
 
 # ==============================================================================
 # CORS
@@ -388,9 +415,13 @@ if DEBUG:
     ]
 else:
     CORS_ALLOWED_ORIGINS = [
-        "https://materialwear.com",
-        "https://www.materialwear.com",
-        "https://material-wear.onrender.com",
+        "https://materialwearlimited.com",
+        "https://www.materialwearlimited.com",
+    ]
+    # Same reasoning as ALLOWED_HOSTS above — exact Railway subdomain isn't
+    # known until the service is created, so match it by pattern.
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^https://.*\.up\.railway\.app$",
     ]
 
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -461,15 +492,40 @@ CLOUDINARY_STORAGE = {
 # EMAIL
 # ==============================================================================
 
+# Namecheap Private Email SMTP. Port 587 with STARTTLS; use 465 with
+# EMAIL_USE_SSL=True (and EMAIL_USE_TLS=False) if 587 is blocked.
+# EMAIL_HOST_USER must be a full mailbox address, not just the local part.
 EMAIL_BACKEND = env(
     "EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
 )
-EMAIL_HOST = env("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_HOST = env("EMAIL_HOST", default="mail.privateemail.com")
 EMAIL_PORT = env.int("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@materialwear.com")
+EMAIL_TIMEOUT = env.int("EMAIL_TIMEOUT", default=20)
+
+# ── Role-based sender addresses ───────────────────────────────────────────
+# Different mail gets a different From: so replies land somewhere sensible.
+# All are aliases on the same Namecheap mailbox, so they cost nothing extra —
+# but the authenticated account (EMAIL_HOST_USER) must be permitted to send
+# as each one, or the provider will reject/spam-flag the message.
+#
+# DEFAULT_FROM_EMAIL stays noreply@ because allauth/dj-rest-auth use it for
+# account mail (verification, password reset), where a reply means nothing.
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="noreply@materialwearlimited.com")
+SERVER_EMAIL = env("SERVER_EMAIL", default="admin@materialwearlimited.com")
+
+# Order confirmations — customers do reply to these ("has this shipped?"),
+# so it must be a monitored address, never noreply@.
+ORDER_FROM_EMAIL = env("ORDER_FROM_EMAIL", default="order@materialwearlimited.com")
+# Payment receipts and Paystack-related correspondence.
+PAYMENT_FROM_EMAIL = env("PAYMENT_FROM_EMAIL", default="payments@materialwearlimited.com")
+# Group/bulk order + live form organiser mail and generated reports.
+BULK_FROM_EMAIL = env("BULK_FROM_EMAIL", default="bulk@materialwearlimited.com")
+# Customer service.
+SUPPORT_EMAIL = env("SUPPORT_EMAIL", default="support@materialwearlimited.com")
 
 
 # ==============================================================================
@@ -499,7 +555,7 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "SERVERS": [
-        {"url": "https://materialwear.com", "description": "Production"},
+        {"url": "https://materialwearlimited.com", "description": "Production"},
         {"url": "http://localhost:8000", "description": "Development"},
     ],
     "COMPONENT_SPLIT_REQUEST": True,

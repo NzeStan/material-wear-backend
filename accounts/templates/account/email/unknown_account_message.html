@@ -1,0 +1,43 @@
+{% load i18n %}<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #1F2937; margin: 0; padding: 0; background-color: #F3F4F6; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .email-wrapper { background-color: #FFFBEB; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .header { background-color: #064E3B; color: #FFFBEB; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; font-weight: bold; }
+        .content { padding: 30px 25px; background-color: #FFFBEB; }
+        .content p { margin: 15px 0; color: #1F2937; }
+        .button-wrapper { text-align: center; margin: 20px 0; }
+        .button { display: inline-block; background-color: #F59E0B; color: white; padding: 12px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 15px; }
+        .footer { background-color: #064E3B; color: #FFFBEB; padding: 20px 25px; text-align: center; font-size: 14px; }
+        .footer p { margin: 5px 0; }
+        .highlight { color: #064E3B; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="email-wrapper">
+            <div class="header">
+                <h1>No Account Found</h1>
+            </div>
+            <div class="content">
+                <p>Hello,</p>
+                <p>Someone requested a password reset for this email address at <strong>MATERIAL WEAR</strong> — but we don't have an account with this email.</p>
+                <p>If this was you, you can create an account here:</p>
+                <div class="button-wrapper">
+                    <a href="{{ signup_url }}" class="button">Create Account</a>
+                </div>
+                <p>If this wasn't you, you can safely ignore this email.</p>
+                <p>Best regards,<br><span class="highlight">The MATERIAL Team</span></p>
+            </div>
+            <div class="footer">
+                <p>&copy; {% now "Y" %} MATERIAL WEAR</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
