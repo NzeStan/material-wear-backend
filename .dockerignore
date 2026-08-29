@@ -1,0 +1,24 @@
+fly.toml
+.git/
+*.sqlite3
+
+# Real secrets — must never end up baked into an image layer
+.env
+.env.*
+
+# Large/irrelevant to the container; .venv is a Windows-built venv anyway,
+# incompatible with the Linux image and would bloat/slow the build for nothing
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Regenerated inside the image by collectstatic — copying the local one in
+# is wasted bytes, not a security issue, but no reason to ship it twice
+staticfiles/
+
+# Test/tooling caches
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage

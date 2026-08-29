@@ -36,15 +36,18 @@ if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", ".trycloudflare.com"]
     CSRF_TRUSTED_ORIGINS = ["https://*.ngrok-free.app", "https://*.trycloudflare.com"]
 else:
-    # .up.railway.app: wildcarded because the exact subdomain is only assigned
-    # once the Railway service is created (e.g. material-wear-production.up.railway.app)
+    # .up.railway.app kept in case that service isn't torn down yet.
+    # material-wear-backend.fly.dev is the actual Fly app domain (fixed,
+    # unlike Railway's, since Fly app names aren't auto-randomized).
     ALLOWED_HOSTS = [
         ".up.railway.app",
+        "material-wear-backend.fly.dev",
         "www.materialwearlimited.com",
         "materialwearlimited.com",
     ]
     CSRF_TRUSTED_ORIGINS = [
         "https://*.up.railway.app",
+        "https://material-wear-backend.fly.dev",
         "https://www.materialwearlimited.com",
         "https://materialwearlimited.com",
     ]
@@ -57,6 +60,14 @@ else:
 X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 USE_CROSS_SITE_COOKIES = env.bool("DJANGO_USE_CROSS_SITE_COOKIES", default=DEBUG)
+
+# Fly (and Railway, and most PaaS proxies) terminate TLS at the edge and
+# forward requests internally over plain HTTP, signaling the original
+# scheme via this header. Without telling Django to trust it,
+# request.is_secure() is always False behind the proxy, and
+# SECURE_SSL_REDIRECT below redirects every single request to https —
+# including ones already on https — forever (same-URL redirect loop).
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
@@ -122,7 +133,14 @@ CURRENCY_CODE = "NGN"
 WHATSAPP_NUMBER = env.str("WHATSAPP_NUMBER", default="2348071000804")
 
 SITE_URL = "http://127.0.0.1:8000" if DEBUG else "https://materialwearlimited.com"
-FRONTEND_URL = "http://localhost:3000" if DEBUG else "https://materialwearlimited.com"
+FRONTEND_URL = (
+    "http://localhost:3000" if DEBUG
+    # Fly URL until materialwearlimited.com's DNS actually points at the
+    # frontend — swap back once that's attached, or the post-social-login
+    # redirect and email links (welcome email, password reset) send people
+    # to a domain that isn't live yet.
+    else "https://material-wear-frontend.fly.dev"
+)
 
 
 # ==============================================================================
@@ -417,6 +435,10 @@ else:
     CORS_ALLOWED_ORIGINS = [
         "https://materialwearlimited.com",
         "https://www.materialwearlimited.com",
+        # Frontend's Fly URL, ahead of the custom domain being attached.
+        # Keep this even after that happens — costs nothing to leave, and
+        # avoids re-breaking things if the custom domain is ever unhooked.
+        "https://material-wear-frontend.fly.dev",
     ]
     # Same reasoning as ALLOWED_HOSTS above — exact Railway subdomain isn't
     # known until the service is created, so match it by pattern.
