@@ -43,6 +43,7 @@ else:
         ".up.railway.app",
         "material-wear-backend.fly.dev",
         "material-wear-backend.onrender.com",
+        "api.materialwearlimited.com",
         "www.materialwearlimited.com",
         "materialwearlimited.com",
     ]
@@ -50,6 +51,7 @@ else:
         "https://*.up.railway.app",
         "https://material-wear-backend.fly.dev",
         "https://material-wear-backend.onrender.com",
+        "https://api.materialwearlimited.com",
         "https://www.materialwearlimited.com",
         "https://materialwearlimited.com",
     ]
@@ -136,18 +138,16 @@ WHATSAPP_NUMBER = env.str("WHATSAPP_NUMBER", default="2348071000804")
 
 SITE_URL = (
     "http://127.0.0.1:8000" if DEBUG
-    # Same reasoning as FRONTEND_URL below — points at the backend's own
-    # domain (used for admin-page links in a few notification emails), and
-    # materialwearlimited.com isn't DNS-pointed at the backend.
-    else "https://material-wear-backend.onrender.com"
+    # Backend's own domain (used for admin-page links in a few
+    # notification emails) — now DNS-pointed and live.
+    else "https://api.materialwearlimited.com"
 )
 FRONTEND_URL = (
     "http://localhost:3000" if DEBUG
-    # Railway URL until materialwearlimited.com's DNS actually points at
-    # the frontend — swap back once that's attached, or the post-social-
-    # login redirect and email links (welcome email, password reset) send
-    # people to a domain that isn't live yet.
-    else "https://material-wear-frontend-production.up.railway.app"
+    # materialwearlimited.com is now DNS-pointed at the frontend — real
+    # domain, not a platform URL, for the post-social-login redirect and
+    # email links (welcome email, password reset).
+    else "https://www.materialwearlimited.com"
 )
 
 
