@@ -34,7 +34,15 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         return settings.FRONTEND_URL
 
     def send_mail(self, template_prefix, email, context):
-        """Custom email sending with HTML support."""
+        """Custom email sending with HTML support.
+
+        Wrapped in try/except: this backs every allauth-triggered email
+        (signup confirmation, password reset, etc.), and an SMTP failure
+        here must not take down the request that triggered it — the
+        account was already created/logged in by the time this runs, so a
+        mail outage shouldn't turn into a 500 for the user. Same reasoning
+        as contact/views.py's send_email_async wrapping.
+        """
         subject = render_to_string(f"{template_prefix}_subject.txt", context)
         subject = "".join(subject.splitlines())
 
@@ -43,15 +51,18 @@ class CustomAccountAdapter(DefaultAccountAdapter):
 
         from_email = self.get_from_email()
 
-        send_mail(
-            subject=subject,
-            message=plain_message,
-            from_email=from_email,
-            recipient_list=[email],
-            html_message=html_message,
-            fail_silently=False,
-        )
-        logger.info(f"Email sent to {email} with subject: {subject}")
+        try:
+            send_mail(
+                subject=subject,
+                message=plain_message,
+                from_email=from_email,
+                recipient_list=[email],
+                html_message=html_message,
+                fail_silently=False,
+            )
+            logger.info(f"Email sent to {email} with subject: {subject}")
+        except Exception:
+            logger.exception(f"Failed to send email to {email} (subject: {subject})")
 
     def save_user(self, request, user, form, commit=True):
         """Save user with additional fields."""

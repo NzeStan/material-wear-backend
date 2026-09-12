@@ -132,14 +132,20 @@ CURRENCY_CODE = "NGN"
 
 WHATSAPP_NUMBER = env.str("WHATSAPP_NUMBER", default="2348071000804")
 
-SITE_URL = "http://127.0.0.1:8000" if DEBUG else "https://materialwearlimited.com"
+SITE_URL = (
+    "http://127.0.0.1:8000" if DEBUG
+    # Same reasoning as FRONTEND_URL below — points at the backend's own
+    # domain (used for admin-page links in a few notification emails), and
+    # materialwearlimited.com isn't DNS-pointed at anything yet.
+    else "https://material-wear-backend-production.up.railway.app"
+)
 FRONTEND_URL = (
     "http://localhost:3000" if DEBUG
-    # Fly URL until materialwearlimited.com's DNS actually points at the
-    # frontend — swap back once that's attached, or the post-social-login
-    # redirect and email links (welcome email, password reset) send people
-    # to a domain that isn't live yet.
-    else "https://material-wear-frontend.fly.dev"
+    # Railway URL until materialwearlimited.com's DNS actually points at
+    # the frontend — swap back once that's attached, or the post-social-
+    # login redirect and email links (welcome email, password reset) send
+    # people to a domain that isn't live yet.
+    else "https://material-wear-frontend-production.up.railway.app"
 )
 
 
