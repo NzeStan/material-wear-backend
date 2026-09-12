@@ -42,12 +42,14 @@ else:
     ALLOWED_HOSTS = [
         ".up.railway.app",
         "material-wear-backend.fly.dev",
+        "material-wear-backend.onrender.com",
         "www.materialwearlimited.com",
         "materialwearlimited.com",
     ]
     CSRF_TRUSTED_ORIGINS = [
         "https://*.up.railway.app",
         "https://material-wear-backend.fly.dev",
+        "https://material-wear-backend.onrender.com",
         "https://www.materialwearlimited.com",
         "https://materialwearlimited.com",
     ]
@@ -136,8 +138,8 @@ SITE_URL = (
     "http://127.0.0.1:8000" if DEBUG
     # Same reasoning as FRONTEND_URL below — points at the backend's own
     # domain (used for admin-page links in a few notification emails), and
-    # materialwearlimited.com isn't DNS-pointed at anything yet.
-    else "https://material-wear-backend-production.up.railway.app"
+    # materialwearlimited.com isn't DNS-pointed at the backend.
+    else "https://material-wear-backend.onrender.com"
 )
 FRONTEND_URL = (
     "http://localhost:3000" if DEBUG
