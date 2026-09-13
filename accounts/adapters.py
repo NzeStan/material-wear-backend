@@ -127,7 +127,16 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
                     pass
 
                 sociallogin.connect(request, existing_user)
-                sociallogin.state["process"] = "connect"
+                # NOT setting state["process"] = "connect" here: that flag
+                # tells allauth this is allauth's classic "manage connected
+                # accounts" flow, which redirects to reverse
+                # ("socialaccount_connections") on completion — a URL name
+                # that only exists if allauth.socialaccount.urls is
+                # included, which it isn't in this API-only project. That
+                # caused every social login for an email with an existing
+                # account to crash with NoReverseMatch. sociallogin.connect()
+                # above already does the actual linking; this flag isn't
+                # needed for that.
 
                 # Ensure the email is marked as verified
                 email_address = existing_user.emailaddress_set.filter(

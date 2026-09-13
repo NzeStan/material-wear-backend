@@ -385,7 +385,14 @@ class CustomSocialAccountAdapterTests(TestCase):
 
         # Should have called connect with existing user
         mock_sociallogin.connect.assert_called_once_with(self.request, existing_user)
-        self.assertEqual(mock_sociallogin.state["process"], "connect")
+        # state["process"] must NOT be set to "connect" here: that flag
+        # routes allauth to redirect via reverse("socialaccount_connections")
+        # on completion, a URL name this API-only project never registers
+        # (allauth.socialaccount.urls isn't included) — setting it crashed
+        # every social login for an email with an existing account with
+        # NoReverseMatch in production. sociallogin.connect() above already
+        # does the actual linking.
+        self.assertNotIn("process", mock_sociallogin.state)
 
     def test_pre_social_login_marks_email_verified_when_linking(self):
         """Test pre_social_login marks email as verified when linking"""
