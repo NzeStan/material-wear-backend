@@ -33,6 +33,17 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         not LOGIN_REDIRECT_URL (the Django admin, meant for staff)."""
         return settings.FRONTEND_URL
 
+    def get_email_confirmation_url(self, request, emailconfirmation):
+        """Where the confirmation email's link points. allauth's default
+        builds a link to its own server-rendered Django page
+        (/accounts/confirm-email/<key>/) — meaningless here since this is
+        an API-only backend with no such template, so customers clicking
+        the link landed on a broken/blank page. Point it at the frontend's
+        VerifyEmail page instead, which calls back into
+        /api/auth/social/registration/verify-email/ with the key."""
+        frontend_base = settings.FRONTEND_URL.rstrip("/")
+        return f"{frontend_base}/verify-email/{emailconfirmation.key}"
+
     def send_mail(self, template_prefix, email, context):
         """Custom email sending with HTML support.
 
