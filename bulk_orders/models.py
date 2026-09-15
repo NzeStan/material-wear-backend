@@ -144,7 +144,12 @@ class OrderEntry(models.Model):
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    reference = models.CharField(max_length=20, unique=True)
+    # "MATERIAL-BULK-" (14 chars) + 8 hex chars = 22, or 12 hex chars = 26 in
+    # the retry-collision fallback — both already over the old max_length=20,
+    # unconditionally, on every single save. SQLite (local dev) doesn't
+    # enforce CharField length at the DB level, so this was invisible until
+    # a real Postgres deployment rejected it with StringDataRightTruncation.
+    reference = models.CharField(max_length=32, unique=True)
     bulk_order = models.ForeignKey(
         "BulkOrderLink", on_delete=models.CASCADE, related_name="orders"
     )
