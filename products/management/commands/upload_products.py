@@ -6,6 +6,7 @@ This comprehensive upload utility handles ALL edge cases and validations.
 """
 
 import csv
+import hashlib
 import requests
 import logging
 import re
@@ -338,12 +339,23 @@ class Command(BaseCommand):
             tmp.flush()
             tmp.seek(0)  # Reset file pointer to beginning for reading
 
-            fname = url.split("/")[-1].split("?")[0]
-            if not any(
-                fname.lower().endswith(e)
-                for e in [".jpg", ".jpeg", ".png", ".gif", ".webp"]
-            ):
-                fname += ".jpg"
+            orig_name = url.split("/")[-1].split("?")[0]
+            ext = ".jpg"
+            for e in [".jpg", ".jpeg", ".png", ".gif", ".webp"]:
+                if orig_name.lower().endswith(e):
+                    ext = e
+                    break
+
+            # ImageField's DB column (default max_length=100) stores
+            # "product_images/<name>" for every image on the model — long,
+            # descriptive Wikimedia Commons filenames (some 100+ chars on
+            # their own, e.g. "Traditional_wooden_canoes_docked_along_the_
+            # muddy_River_banks_of_a_creek_in_the_Ogu_Bolo_community%2C_
+            # Rivers_State%2C_Nigeria.jpg") blow past that limit and Postgres
+            # rejects the insert with StringDataRightTruncation. A short,
+            # deterministic hash keeps every filename well under the limit
+            # regardless of source.
+            fname = hashlib.md5(url.encode("utf-8")).hexdigest()[:16] + ext
 
             return File(tmp, name=fname)
 
