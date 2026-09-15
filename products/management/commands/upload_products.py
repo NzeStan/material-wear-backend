@@ -303,7 +303,18 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.WARNING("    URL too long"))
                 return None
 
-            resp = requests.get(url.strip(), timeout=30, stream=True)
+            # Wikimedia (and some other hosts) reject requests.get's default
+            # generic User-Agent ("python-requests/x.x") under their bot-
+            # blocking policy — every nysc_tour_data.csv image (sourced from
+            # Wikimedia Commons) failed this way until this header was added.
+            headers = {
+                "User-Agent": (
+                    "MaterialWearLimited/1.0 "
+                    "(https://www.materialwearlimited.com; "
+                    "hello@materialwearlimited.com)"
+                )
+            }
+            resp = requests.get(url.strip(), timeout=30, stream=True, headers=headers)
             resp.raise_for_status()
 
             ctype = resp.headers.get("content-type", "")
