@@ -23,12 +23,28 @@ against the same folder creates new rows each time — same as the CSV path,
 which doesn't dedupe either — so don't re-run on a folder you've already
 uploaded unless you want duplicates.
 
+NOTE: --folder is a path on whatever machine RUNS this command. If you run
+it in a shell on the deployed server (Render, etc.), it can only see that
+server's own filesystem — not your computer. Either run this command
+locally (pointed at production settings), or use --cloudinary-folder below.
+
+Cloudinary-folder sync mode:
+-----------------------------
+For bulk-uploading straight from your computer: upload the images yourself
+via Cloudinary's own Media Library (cloudinary.com console, drag-and-drop
+into a folder, e.g. "feed_images") — no server involved — then run this
+command with --cloudinary-folder to scan that Cloudinary folder via the
+Admin API and create any feed.Image rows that don't exist yet. This IS
+deduped: re-running only picks up images added since the last sync.
+
 Usage:
 ------
 python manage.py upload_images path/to/images.csv
 python manage.py upload_images path/to/images.csv --dry-run
 python manage.py upload_images --folder path/to/local/images
 python manage.py upload_images --folder path/to/local/images --dry-run
+python manage.py upload_images --cloudinary-folder feed_images
+python manage.py upload_images --cloudinary-folder feed_images --dry-run
 """
 
 import csv
@@ -36,6 +52,7 @@ import requests
 import logging
 import re
 from pathlib import Path
+import cloudinary.api
 from django.core.management.base import BaseCommand, CommandError
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -49,7 +66,7 @@ MAX_IMAGE_BYTES = 10 * 1024 * 1024
 
 
 class Command(BaseCommand):
-    help = "Upload images to the feed app, from a CSV of URLs or a local folder"
+    help = "Upload images to the feed app, from a CSV of URLs, a local folder, or a Cloudinary folder sync"
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -59,7 +76,15 @@ class Command(BaseCommand):
             "--folder",
             type=str,
             default=None,
-            help="Path to a local folder of images to upload directly to Cloudinary",
+            help="Path to a local folder of images to upload directly to Cloudinary "
+            "(local to whatever machine runs this command)",
+        )
+        parser.add_argument(
+            "--cloudinary-folder",
+            type=str,
+            default=None,
+            help="Cloudinary folder prefix (e.g. 'feed_images') to sync from — "
+            "creates feed.Image rows for anything in that folder not already imported",
         )
         parser.add_argument(
             "--dry-run",
@@ -70,18 +95,26 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         csv_file = options["csv_file"]
         folder = options["folder"]
+        cloudinary_folder = options["cloudinary_folder"]
         dry_run = options["dry_run"]
 
-        if bool(csv_file) == bool(folder):
+        modes = [bool(csv_file), bool(folder), bool(cloudinary_folder)]
+        if sum(modes) != 1:
             raise CommandError(
-                "Provide exactly one of: a CSV file path, or --folder <path>"
+                "Provide exactly one of: a CSV file path, --folder <path>, "
+                "or --cloudinary-folder <prefix>"
             )
 
         # Header
         self.stdout.write(self.style.SUCCESS("=" * 80))
         self.stdout.write(self.style.SUCCESS("  MATERIAL ACCESSORIES - IMAGE UPLOAD"))
         self.stdout.write(self.style.SUCCESS("=" * 80))
-        self.stdout.write(f"Source: {self.style.WARNING(csv_file or f'{folder} (local folder)')}")
+        source_desc = (
+            csv_file
+            or (f"{folder} (local folder)" if folder else None)
+            or f"{cloudinary_folder} (Cloudinary folder sync)"
+        )
+        self.stdout.write(f"Source: {self.style.WARNING(source_desc)}")
         if dry_run:
             self.stdout.write(
                 self.style.NOTICE("MODE: DRY RUN (No changes will be saved)\n")
@@ -89,6 +122,10 @@ class Command(BaseCommand):
 
         if folder:
             self._handle_folder(folder, dry_run)
+            return
+
+        if cloudinary_folder:
+            self._handle_cloudinary_folder(cloudinary_folder, dry_run)
             return
 
         try:
@@ -200,6 +237,75 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.ERROR(f"  ✗ Error: {str(e)}"))
 
         self._print_summary(len(files), success_count, error_count, errors, dry_run)
+
+    def _handle_cloudinary_folder(self, folder_prefix, dry_run):
+        """
+        Scan a Cloudinary folder via the Admin API and create a feed.Image
+        row for every resource in it that isn't already imported (matched by
+        the same "public_id.format" string _extract_cloudinary_public_id
+        produces elsewhere in this file, so dedup checks work either way an
+        image got imported).
+        """
+        resources = []
+        next_cursor = None
+        while True:
+            kwargs = {"type": "upload", "prefix": folder_prefix, "max_results": 500}
+            if next_cursor:
+                kwargs["next_cursor"] = next_cursor
+            try:
+                page = cloudinary.api.resources(**kwargs)
+            except Exception as e:
+                raise CommandError(f"Cloudinary API error: {str(e)}")
+            resources.extend(page.get("resources", []))
+            next_cursor = page.get("next_cursor")
+            if not next_cursor:
+                break
+
+        if not resources:
+            raise CommandError(f"No images found in Cloudinary folder: {folder_prefix}")
+
+        self.stdout.write(f"Found {len(resources)} images in Cloudinary folder\n")
+
+        success_count = skip_count = error_count = 0
+        errors = []
+
+        for idx, resource in enumerate(resources, start=1):
+            public_id = f"{resource['public_id']}.{resource['format']}"
+            self.stdout.write(f"\n[{idx}/{len(resources)}] {public_id}")
+            try:
+                if Image.objects.filter(url=public_id).exists():
+                    skip_count += 1
+                    self.stdout.write(self.style.NOTICE("  ⊘ Already imported"))
+                    continue
+
+                if dry_run:
+                    self.stdout.write(self.style.SUCCESS("  (would import)"))
+                else:
+                    Image.objects.create(active=True, url=public_id)
+                    self.stdout.write(self.style.SUCCESS("  ✓ Imported"))
+                success_count += 1
+            except Exception as e:
+                error_count += 1
+                errors.append(f"{public_id}: {str(e)}")
+                self.stdout.write(self.style.ERROR(f"  ✗ Error: {str(e)}"))
+
+        self.stdout.write("\n" + "=" * 80)
+        self.stdout.write(self.style.SUCCESS("SYNC SUMMARY"))
+        self.stdout.write("=" * 80)
+        self.stdout.write(f"Total in folder: {len(resources)}")
+        self.stdout.write(self.style.SUCCESS(f"✓ Imported: {success_count}"))
+        if skip_count:
+            self.stdout.write(self.style.NOTICE(f"⊘ Already imported: {skip_count}"))
+        if error_count:
+            self.stdout.write(self.style.ERROR(f"✗ Errors: {error_count}"))
+            for err in errors:
+                self.stdout.write(self.style.ERROR(f"  • {err}"))
+        self.stdout.write("=" * 80 + "\n")
+
+        if dry_run:
+            self.stdout.write(
+                self.style.NOTICE("DRY RUN COMPLETE - No changes were saved to the database")
+            )
 
     def _create_image_from_local_file(self, path, dry_run):
         """Upload a single local file to Cloudinary as an active feed Image."""
