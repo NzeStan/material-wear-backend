@@ -1,0 +1,1069 @@
+INFO 2026-09-16 17:23:48,086 apps 30588 31276 AXES: BEGIN version 6.4.0, blocking by ip_address or username
+Creating test database for alias 'default'...
+
+(process:30588): GLib-GIO-WARNING **: 17:23:48.320: Unexpectedly, UWP app `PythonSoftwareFoundation.PythonManager_26.3.240.0_x64__3847v3x7pw1km' (AUMId `PythonSoftwareFoundation.PythonManager_3847v3x7pw1km!Python.Exe') supports 4 extensions but has no verbs
+
+(process:30588): GLib-GIO-WARNING **: 17:23:48.320: Unexpectedly, UWP app `PythonSoftwareFoundation.PythonManager_26.3.240.0_x64__3847v3x7pw1km' (AUMId `PythonSoftwareFoundation.PythonManager_3847v3x7pw1km!Pythonw.Exe') supports 2 extensions but has no verbs
+
+(process:30588): GLib-GIO-WARNING **: 17:23:48.351: Unexpectedly, UWP app `Clipchamp.Clipchamp_4.5.10920.0_x64__yxz26nhyzhsrt' (AUMId `Clipchamp.Clipchamp_yxz26nhyzhsrt!App') supports 41 extensions but has no verbs
+
+(process:30588): GLib-GIO-WARNING **: 17:23:48.474: Unexpectedly, UWP app `Microsoft.ScreenSketch_11.2605.38.0_x64__8wekyb3d8bbwe' (AUMId `Microsoft.ScreenSketch_8wekyb3d8bbwe!App') supports 29 extensions but has no verbs
+
+(process:30588): GLib-GIO-WARNING **: 17:23:48.519: Unexpectedly, UWP app `Microsoft.OutlookForWindows_1.2026.902.100_x64__8wekyb3d8bbwe' (AUMId `Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows') supports 5 extensions but has no verbs
+
+(process:30588): GLib-GIO-WARNING **: 17:23:48.528: Unexpectedly, UWP app `OpenAI.Codex_26.908.9136.0_x64__2p2nqsd0c76g0' (AUMId `OpenAI.Codex_2p2nqsd0c76g0!App') supports 8 extensions but has no verbs
+Found 179 test(s).
+System check identified no issues (0 silenced).
+INFO 2026-09-16 17:23:50,623 attempts 30588 31276 AXES: Cleaned up 0 expired access attempts from database that were older than 2026-09-16 15:23:50.622384+00:00
+INFO 2026-09-16 17:23:50,623 database 30588 31276 AXES: Successful login by {username: "********************", ip_address: "********************", user_agent: "<unknown>", path_info: "<unknown>"}.
+INFO 2026-09-16 17:23:50,624 attempts 30588 31276 AXES: Reset 0 access attempts from database.
+INFO 2026-09-16 17:23:50,624 database 30588 31276 AXES: Deleted 0 failed login attempts by {username: "********************", ip_address: "********************", user_agent: "<unknown>", path_info: "<unknown>"} from database.
+INFO 2026-09-16 17:23:50,658 middleware 30588 31276 Admin access granted to IP: 127.0.0.1
+.INFO 2026-09-16 17:23:50,992 attempts 30588 31276 AXES: Cleaned up 0 expired access attempts from database that were older than 2026-09-16 15:23:50.992276+00:00
+INFO 2026-09-16 17:23:50,993 database 30588 31276 AXES: Successful login by {username: "********************", ip_address: "********************", user_agent: "<unknown>", path_info: "<unknown>"}.
+INFO 2026-09-16 17:23:50,993 attempts 30588 31276 AXES: Reset 0 access attempts from database.
+INFO 2026-09-16 17:23:50,993 database 30588 31276 AXES: Deleted 0 failed login attempts by {username: "********************", ip_address: "********************", user_agent: "<unknown>", path_info: "<unknown>"} from database.
+INFO 2026-09-16 17:23:51,011 middleware 30588 31276 Admin access granted to IP: 127.0.0.1
+.INFO 2026-09-16 17:23:51,317 attempts 30588 31276 AXES: Cleaned up 0 expired access attempts from database that were older than 2026-09-16 15:23:51.317209+00:00
+INFO 2026-09-16 17:23:51,317 database 30588 31276 AXES: Successful login by {username: "********************", ip_address: "********************", user_agent: "<unknown>", path_info: "<unknown>"}.
+INFO 2026-09-16 17:23:51,318 attempts 30588 31276 AXES: Reset 0 access attempts from database.
+INFO 2026-09-16 17:23:51,318 database 30588 31276 AXES: Deleted 0 failed login attempts by {username: "********************", ip_address: "********************", user_agent: "<unknown>", path_info: "<unknown>"} from database.
+INFO 2026-09-16 17:23:51,337 middleware 30588 31276 Admin access granted to IP: 127.0.0.1
+.ERROR 2026-09-16 17:23:51,354 utils 30588 31276 Error downloading image from https://cloudinary.com/image.jpg: Network error
+..INFO 2026-09-16 17:23:51,705 models 30588 31276 Generated slug: package-test for organization: PACKAGE TEST
+INFO 2026-09-16 17:23:51,707 models 30588 31276 ImageBulkOrderLink saved successfully: package-test
+INFO 2026-09-16 17:23:51,743 utils 30588 31276 Generated admin package with images for: package-test
+.INFO 2026-09-16 17:23:52,046 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:52,047 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:52,047 models 30588 31276 ImageCouponCode saved successfully: 71S57VF3
+INFO 2026-09-16 17:23:52,047 models 30588 31276 ImageCouponCode saved successfully: KK8MT5C7
+INFO 2026-09-16 17:23:52,048 models 30588 31276 ImageCouponCode saved successfully: VTGQ2CHW
+INFO 2026-09-16 17:23:52,048 models 30588 31276 ImageCouponCode saved successfully: XEFB9CBS
+INFO 2026-09-16 17:23:52,048 models 30588 31276 ImageCouponCode saved successfully: 3LDVQ9OJ
+INFO 2026-09-16 17:23:52,049 models 30588 31276 ImageCouponCode saved successfully: QY71IAE6
+INFO 2026-09-16 17:23:52,049 models 30588 31276 ImageCouponCode saved successfully: GK4YAUJJ
+INFO 2026-09-16 17:23:52,049 models 30588 31276 ImageCouponCode saved successfully: UHKOFYZ5
+INFO 2026-09-16 17:23:52,050 models 30588 31276 ImageCouponCode saved successfully: VPIIL454
+INFO 2026-09-16 17:23:52,050 models 30588 31276 ImageCouponCode saved successfully: IYT27DAI
+INFO 2026-09-16 17:23:52,050 utils 30588 31276 Generated 10 coupon codes for image bulk order: 4eca20c2-945d-4654-adbb-9b3820a02dd5
+.INFO 2026-09-16 17:23:52,334 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:52,334 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:52,334 models 30588 31276 ImageCouponCode saved successfully: FI5UJW1T
+INFO 2026-09-16 17:23:52,334 models 30588 31276 ImageCouponCode saved successfully: ETJY1YFH
+INFO 2026-09-16 17:23:52,334 models 30588 31276 ImageCouponCode saved successfully: 6G90K83I
+INFO 2026-09-16 17:23:52,334 models 30588 31276 ImageCouponCode saved successfully: WZDPZXJQ
+INFO 2026-09-16 17:23:52,336 models 30588 31276 ImageCouponCode saved successfully: 60N0L3P8
+INFO 2026-09-16 17:23:52,336 models 30588 31276 ImageCouponCode saved successfully: AFGYXIF2
+INFO 2026-09-16 17:23:52,336 models 30588 31276 ImageCouponCode saved successfully: DALPUWA9
+INFO 2026-09-16 17:23:52,336 models 30588 31276 ImageCouponCode saved successfully: TP89F1OK
+INFO 2026-09-16 17:23:52,336 models 30588 31276 ImageCouponCode saved successfully: 0DXP747V
+INFO 2026-09-16 17:23:52,338 models 30588 31276 ImageCouponCode saved successfully: LNB89TUD
+INFO 2026-09-16 17:23:52,338 utils 30588 31276 Generated 10 coupon codes for image bulk order: 98e4cd6a-ebe7-41fd-a628-fd143925d09a
+.INFO 2026-09-16 17:23:52,625 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:52,625 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:52,625 models 30588 31276 ImageCouponCode saved successfully: TLGHK7JN
+INFO 2026-09-16 17:23:52,625 models 30588 31276 ImageCouponCode saved successfully: T4FXO8A4
+INFO 2026-09-16 17:23:52,625 models 30588 31276 ImageCouponCode saved successfully: TDY2TUYW
+INFO 2026-09-16 17:23:52,625 models 30588 31276 ImageCouponCode saved successfully: 05TYPJEB
+INFO 2026-09-16 17:23:52,627 models 30588 31276 ImageCouponCode saved successfully: VXLGC1MI
+INFO 2026-09-16 17:23:52,627 models 30588 31276 ImageCouponCode saved successfully: DKMJZF1O
+INFO 2026-09-16 17:23:52,627 models 30588 31276 ImageCouponCode saved successfully: MXJDSXEF
+INFO 2026-09-16 17:23:52,627 models 30588 31276 ImageCouponCode saved successfully: AIY20RPU
+INFO 2026-09-16 17:23:52,627 models 30588 31276 ImageCouponCode saved successfully: K4PDD9C3
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: 5O71MLYB
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: EIO9YG1S
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: AZS7IZFP
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: ZEG71M61
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: HWNC7ZCG
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: DZ3J5EOR
+INFO 2026-09-16 17:23:52,629 models 30588 31276 ImageCouponCode saved successfully: M9TMIRFX
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: 9NGCYHMZ
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: FQK9TLRW
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: NGN1W79B
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: PI4ML0DQ
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: T6SBUAPB
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: 8HJ6MKZK
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: ZGMHC297
+INFO 2026-09-16 17:23:52,631 models 30588 31276 ImageCouponCode saved successfully: 8FKVJ20N
+INFO 2026-09-16 17:23:52,633 models 30588 31276 ImageCouponCode saved successfully: KS23Y9F1
+INFO 2026-09-16 17:23:52,633 utils 30588 31276 Generated 25 coupon codes for image bulk order: 8c02965d-d8c1-491b-9edb-f07c8d46f738
+.INFO 2026-09-16 17:23:52,916 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:52,916 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:52,916 models 30588 31276 ImageCouponCode saved successfully: 0J65DDKS
+INFO 2026-09-16 17:23:52,916 models 30588 31276 ImageCouponCode saved successfully: HB1MMQA8
+INFO 2026-09-16 17:23:52,916 models 30588 31276 ImageCouponCode saved successfully: 7ILXIP2H
+INFO 2026-09-16 17:23:52,916 models 30588 31276 ImageCouponCode saved successfully: 0X4H6XEB
+INFO 2026-09-16 17:23:52,918 models 30588 31276 ImageCouponCode saved successfully: CA9Z17AL
+INFO 2026-09-16 17:23:52,918 models 30588 31276 ImageCouponCode saved successfully: AWKXDIC1
+INFO 2026-09-16 17:23:52,918 models 30588 31276 ImageCouponCode saved successfully: OZIP05KN
+INFO 2026-09-16 17:23:52,918 models 30588 31276 ImageCouponCode saved successfully: N217QNDV
+INFO 2026-09-16 17:23:52,918 models 30588 31276 ImageCouponCode saved successfully: RR1SKDEK
+INFO 2026-09-16 17:23:52,918 models 30588 31276 ImageCouponCode saved successfully: OY8G4PS8
+INFO 2026-09-16 17:23:52,918 utils 30588 31276 Generated 10 coupon codes for image bulk order: 682f94c5-b504-4de4-ac8a-17ba711ecae5
+.INFO 2026-09-16 17:23:53,200 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: U419EYSN
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: WUI4Q6C8
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: OT0K6M05
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: 9A962HY4
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: TWDERKPS
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: EX2RWQNU
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: QR1057Y4
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: QCQJE96K
+INFO 2026-09-16 17:23:53,200 models 30588 31276 ImageCouponCode saved successfully: 74D4DTTO
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: WGPHXAGU
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: ZA0DQRRE
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 51JQFQEM
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 38ONWSSW
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 6HYKED43
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: A9JB1L3Z
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: HIPX83GW
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: L1PDR7PH
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: Z2PHOO4C
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: VKNVOAQT
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: KI2O66LY
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: MEPTR1KL
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: B20UQ8VR
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: ORGMDT6N
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 2YW329VN
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: YBVALITH
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: XTKHY3SJ
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: OWZWJJ6X
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 2GNZAGVK
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: H50OAF6L
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: QG7B71V2
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: J00CF0QO
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 9X7XUFC2
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: AWOW9JVE
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: JC1OS4VW
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: XFTF3QSP
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: LLQMY2JI
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: KF5181OT
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: BS326SYT
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: ZG0Z2NA7
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: K6GXHCR1
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: JPGNFI26
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 3A6NOSV1
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: YPBH1SA9
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: 1QN5NT3F
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: H6M3C6XY
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: GEMJ1OBY
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: PCHJJB3D
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: E7UA6K40
+INFO 2026-09-16 17:23:53,204 models 30588 31276 ImageCouponCode saved successfully: M7RPH0PP
+INFO 2026-09-16 17:23:53,216 models 30588 31276 ImageCouponCode saved successfully: GKBETPTE
+INFO 2026-09-16 17:23:53,216 utils 30588 31276 Generated 50 coupon codes for image bulk order: 6417397a-52fa-4446-8ed0-e19ed0609e8c
+.INFO 2026-09-16 17:23:53,511 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:53,511 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:53,513 models 30588 31276 ImageCouponCode saved successfully: 755X0X2V
+INFO 2026-09-16 17:23:53,513 models 30588 31276 ImageCouponCode saved successfully: 8RWAITB5
+INFO 2026-09-16 17:23:53,513 models 30588 31276 ImageCouponCode saved successfully: 8RUZ2AE4
+INFO 2026-09-16 17:23:53,514 models 30588 31276 ImageCouponCode saved successfully: 7MOFRRP5
+INFO 2026-09-16 17:23:53,514 models 30588 31276 ImageCouponCode saved successfully: NPK6ZH5V
+INFO 2026-09-16 17:23:53,514 utils 30588 31276 Generated 5 coupon codes for image bulk order: cfe670f9-a7a7-4ce3-bce4-67f37687674a
+.INFO 2026-09-16 17:23:53,781 models 30588 31276 Generated slug: excel-test for organization: EXCEL TEST
+INFO 2026-09-16 17:23:53,781 models 30588 31276 ImageBulkOrderLink saved successfully: excel-test
+INFO 2026-09-16 17:23:53,794 utils 30588 31276 Generated Excel for image bulk order: excel-test
+.INFO 2026-09-16 17:23:54,071 models 30588 31276 Generated slug: excel-test for organization: EXCEL TEST
+INFO 2026-09-16 17:23:54,073 models 30588 31276 ImageBulkOrderLink saved successfully: excel-test
+INFO 2026-09-16 17:23:54,075 utils 30588 31276 Generated Excel for image bulk order: excel-test
+.INFO 2026-09-16 17:23:54,354 models 30588 31276 Generated slug: pdf-test for organization: PDF TEST
+INFO 2026-09-16 17:23:54,354 models 30588 31276 ImageBulkOrderLink saved successfully: pdf-test
+INFO 2026-09-16 17:23:54,356 utils 30588 31276 Generated PDF for image bulk order: pdf-test
+.INFO 2026-09-16 17:23:54,638 models 30588 31276 Generated slug: pdf-test for organization: PDF TEST
+INFO 2026-09-16 17:23:54,638 models 30588 31276 ImageBulkOrderLink saved successfully: pdf-test
+INFO 2026-09-16 17:23:54,645 utils 30588 31276 Generated PDF for image bulk order: pdf-test
+.INFO 2026-09-16 17:23:54,923 models 30588 31276 Generated slug: pdf-test for organization: PDF TEST
+INFO 2026-09-16 17:23:54,923 models 30588 31276 ImageBulkOrderLink saved successfully: pdf-test
+INFO 2026-09-16 17:23:54,926 utils 30588 31276 Generated PDF for image bulk order: pdf-test
+.INFO 2026-09-16 17:23:55,204 models 30588 31276 Generated slug: word-test for organization: WORD TEST
+INFO 2026-09-16 17:23:55,204 models 30588 31276 ImageBulkOrderLink saved successfully: word-test
+INFO 2026-09-16 17:23:55,273 utils 30588 31276 Generated Word document for image bulk order: word-test
+.INFO 2026-09-16 17:23:55,542 models 30588 31276 Generated slug: word-test for organization: WORD TEST
+INFO 2026-09-16 17:23:55,542 models 30588 31276 ImageBulkOrderLink saved successfully: word-test
+INFO 2026-09-16 17:23:55,558 utils 30588 31276 Generated Word document for image bulk order: word-test
+.INFO 2026-09-16 17:23:55,839 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:55,839 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:23:56,111 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:56,111 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:23:56,394 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:56,394 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:56,394 models 30588 31276 Generated reference: IMG-BULK-6981
+INFO 2026-09-16 17:23:56,394 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:23:56,394 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6981
+INFO 2026-09-16 17:23:56,399 models 30588 31276 Generated reference: IMG-BULK-4381
+INFO 2026-09-16 17:23:56,399 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:23:56,399 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4381
+.INFO 2026-09-16 17:23:56,686 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:56,686 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:56,686 models 30588 31276 Generated reference: IMG-BULK-7696
+INFO 2026-09-16 17:23:56,686 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:23:56,686 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7696
+INFO 2026-09-16 17:23:56,686 models 30588 31276 Generated reference: IMG-BULK-1008
+INFO 2026-09-16 17:23:56,686 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:23:56,686 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1008
+INFO 2026-09-16 17:23:56,686 models 30588 31276 Generated reference: IMG-BULK-2740
+INFO 2026-09-16 17:23:56,686 models 30588 31276 Assigned serial_number: 3 for bulk_order: test-church
+INFO 2026-09-16 17:23:56,686 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2740
+.INFO 2026-09-16 17:23:56,956 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:23:56,956 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:23:56,956 models 30588 31276 Generated reference: IMG-BULK-4866
+INFO 2026-09-16 17:23:56,956 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:23:56,956 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4866
+.INFO 2026-09-16 17:23:57,242 models 30588 31276 Generated slug: filter-test for organization: FILTER TEST
+INFO 2026-09-16 17:23:57,242 models 30588 31276 ImageBulkOrderLink saved successfully: filter-test
+INFO 2026-09-16 17:23:57,242 models 30588 31276 ImageCouponCode saved successfully: FILTER123
+INFO 2026-09-16 17:23:57,242 models 30588 31276 Generated reference: IMG-BULK-9015
+INFO 2026-09-16 17:23:57,242 models 30588 31276 Assigned serial_number: 1 for bulk_order: filter-test
+INFO 2026-09-16 17:23:57,242 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9015
+INFO 2026-09-16 17:23:57,248 models 30588 31276 Generated reference: IMG-BULK-9392
+INFO 2026-09-16 17:23:57,248 models 30588 31276 Assigned serial_number: 2 for bulk_order: filter-test
+INFO 2026-09-16 17:23:57,248 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9392
+.INFO 2026-09-16 17:23:57,529 models 30588 31276 Generated slug: filter-test for organization: FILTER TEST
+INFO 2026-09-16 17:23:57,529 models 30588 31276 ImageBulkOrderLink saved successfully: filter-test
+INFO 2026-09-16 17:23:57,529 models 30588 31276 ImageCouponCode saved successfully: FILTER123
+INFO 2026-09-16 17:23:57,529 models 30588 31276 Generated reference: IMG-BULK-8622
+INFO 2026-09-16 17:23:57,529 models 30588 31276 Assigned serial_number: 1 for bulk_order: filter-test
+INFO 2026-09-16 17:23:57,529 models 30588 31276 ImageOrderEntry saved: IMG-BULK-8622
+INFO 2026-09-16 17:23:57,529 models 30588 31276 Generated reference: IMG-BULK-9511
+INFO 2026-09-16 17:23:57,529 models 30588 31276 Assigned serial_number: 2 for bulk_order: filter-test
+INFO 2026-09-16 17:23:57,529 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9511
+.INFO 2026-09-16 17:23:57,800 models 30588 31276 Generated slug: filter-test for organization: FILTER TEST
+INFO 2026-09-16 17:23:57,800 models 30588 31276 ImageBulkOrderLink saved successfully: filter-test
+INFO 2026-09-16 17:23:57,800 models 30588 31276 ImageCouponCode saved successfully: FILTER123
+INFO 2026-09-16 17:23:57,800 models 30588 31276 Generated reference: IMG-BULK-7723
+INFO 2026-09-16 17:23:57,800 models 30588 31276 Assigned serial_number: 1 for bulk_order: filter-test
+INFO 2026-09-16 17:23:57,800 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7723
+INFO 2026-09-16 17:23:57,800 models 30588 31276 Generated reference: IMG-BULK-7959
+INFO 2026-09-16 17:23:57,800 models 30588 31276 Assigned serial_number: 2 for bulk_order: filter-test
+INFO 2026-09-16 17:23:57,800 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7959
+.INFO 2026-09-16 17:23:58,088 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:58,088 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+INFO 2026-09-16 17:23:58,088 models 30588 31276 ImageCouponCode saved successfully: TEST1
+INFO 2026-09-16 17:23:58,088 models 30588 31276 ImageCouponCode saved successfully: TEST2
+.INFO 2026-09-16 17:23:58,355 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:58,355 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:23:58,642 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:58,642 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:23:58,931 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:58,933 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:23:59,212 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:59,212 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:23:59,496 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:59,496 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:23:59,773 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:23:59,773 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:24:00,057 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:00,057 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:24:00,333 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:00,333 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:24:00,609 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:00,609 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:24:00,892 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:00,892 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:24:01,173 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:01,173 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+.INFO 2026-09-16 17:24:01,452 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:01,452 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+INFO 2026-09-16 17:24:01,452 models 30588 31276 Generated reference: IMG-BULK-4911
+INFO 2026-09-16 17:24:01,452 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test-church
+INFO 2026-09-16 17:24:01,452 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4911
+INFO 2026-09-16 17:24:01,452 models 30588 31276 Generated reference: IMG-BULK-3834
+INFO 2026-09-16 17:24:01,452 models 30588 31276 Assigned serial_number: 2 for bulk_order: admin-test-church
+INFO 2026-09-16 17:24:01,452 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3834
+.INFO 2026-09-16 17:24:01,749 models 30588 31276 Generated slug: admin-test-church for organization: ADMIN TEST CHURCH
+INFO 2026-09-16 17:24:01,751 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test-church
+INFO 2026-09-16 17:24:01,751 models 30588 31276 Generated reference: IMG-BULK-2622
+INFO 2026-09-16 17:24:01,751 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test-church
+INFO 2026-09-16 17:24:01,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2622
+INFO 2026-09-16 17:24:01,751 models 30588 31276 Generated reference: IMG-BULK-1271
+INFO 2026-09-16 17:24:01,751 models 30588 31276 Assigned serial_number: 2 for bulk_order: admin-test-church
+INFO 2026-09-16 17:24:01,753 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1271
+.INFO 2026-09-16 17:24:02,029 models 30588 31276 Generated slug: coupon-delete-test for organization: COUPON DELETE TEST
+INFO 2026-09-16 17:24:02,029 models 30588 31276 ImageBulkOrderLink saved successfully: coupon-delete-test
+INFO 2026-09-16 17:24:02,029 models 30588 31276 ImageCouponCode saved successfully: TESTCODE123
+.INFO 2026-09-16 17:24:02,325 models 30588 31276 Generated slug: delete-test for organization: DELETE TEST
+INFO 2026-09-16 17:24:02,325 models 30588 31276 ImageBulkOrderLink saved successfully: delete-test
+INFO 2026-09-16 17:24:02,325 models 30588 31276 Generated reference: IMG-BULK-2832
+INFO 2026-09-16 17:24:02,325 models 30588 31276 Assigned serial_number: 1 for bulk_order: delete-test
+INFO 2026-09-16 17:24:02,325 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2832
+.INFO 2026-09-16 17:24:02,602 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:02,602 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:24:02,883 models 30588 31276 Generated slug: user-relation-test for organization: USER RELATION TEST
+INFO 2026-09-16 17:24:02,883 models 30588 31276 ImageBulkOrderLink saved successfully: user-relation-test
+.INFO 2026-09-16 17:24:03,164 models 30588 31276 Generated slug: default-branding for organization: DEFAULT BRANDING
+INFO 2026-09-16 17:24:03,164 models 30588 31276 ImageBulkOrderLink saved successfully: default-branding
+.INFO 2026-09-16 17:24:03,446 models 30588 31276 Generated slug: absolute-url-test for organization: ABSOLUTE URL TEST
+INFO 2026-09-16 17:24:03,446 models 30588 31276 ImageBulkOrderLink saved successfully: absolute-url-test
+.INFO 2026-09-16 17:24:03,709 models 30588 31276 Generated slug: url-test for organization: URL TEST
+INFO 2026-09-16 17:24:03,725 models 30588 31276 ImageBulkOrderLink saved successfully: url-test
+.INFO 2026-09-16 17:24:03,998 models 30588 31276 Generated slug: exact-time for organization: EXACT TIME
+INFO 2026-09-16 17:24:03,998 models 30588 31276 ImageBulkOrderLink saved successfully: exact-time
+.INFO 2026-09-16 17:24:04,283 models 30588 31276 Generated slug: future-deadline for organization: FUTURE DEADLINE
+INFO 2026-09-16 17:24:04,283 models 30588 31276 ImageBulkOrderLink saved successfully: future-deadline
+.INFO 2026-09-16 17:24:04,566 models 30588 31276 Generated slug: past-deadline for organization: PAST DEADLINE
+INFO 2026-09-16 17:24:04,566 models 30588 31276 ImageBulkOrderLink saved successfully: past-deadline
+.INFO 2026-09-16 17:24:04,842 models 30588 31276 Generated slug: first for organization: FIRST
+INFO 2026-09-16 17:24:04,842 models 30588 31276 ImageBulkOrderLink saved successfully: first
+INFO 2026-09-16 17:24:04,846 models 30588 31276 Generated slug: second for organization: SECOND
+INFO 2026-09-16 17:24:04,846 models 30588 31276 ImageBulkOrderLink saved successfully: second
+.INFO 2026-09-16 17:24:05,123 models 30588 31276 Generated slug: lower-case-church for organization: LOWER CASE CHURCH
+INFO 2026-09-16 17:24:05,123 models 30588 31276 ImageBulkOrderLink saved successfully: lower-case-church
+INFO 2026-09-16 17:24:05,123 models 30588 31276 Generated slug: mixed-case-church for organization: MIXED CASE CHURCH
+INFO 2026-09-16 17:24:05,123 models 30588 31276 ImageBulkOrderLink saved successfully: mixed-case-church
+INFO 2026-09-16 17:24:05,123 models 30588 31276 Generated slug: already-uppercase for organization: ALREADY UPPERCASE
+INFO 2026-09-16 17:24:05,123 models 30588 31276 ImageBulkOrderLink saved successfully: already-uppercase
+.INFO 2026-09-16 17:24:05,387 models 30588 31276 Generated slug: decimal-test for organization: DECIMAL TEST
+INFO 2026-09-16 17:24:05,387 models 30588 31276 ImageBulkOrderLink saved successfully: decimal-test
+...INFO 2026-09-16 17:24:06,237 models 30588 31276 Generated slug: amazing-grace-church for organization: AMAZING GRACE CHURCH
+INFO 2026-09-16 17:24:06,237 models 30588 31276 ImageBulkOrderLink saved successfully: amazing-grace-church
+.INFO 2026-09-16 17:24:06,528 models 30588 31276 Generated slug: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa for organization: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+INFO 2026-09-16 17:24:06,528 models 30588 31276 ImageBulkOrderLink saved successfully: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+.INFO 2026-09-16 17:24:06,795 models 30588 31276 Generated slug: same-church for organization: SAME CHURCH
+INFO 2026-09-16 17:24:06,795 models 30588 31276 ImageBulkOrderLink saved successfully: same-church
+INFO 2026-09-16 17:24:06,795 models 30588 31276 Generated slug: same-church-1 for organization: SAME CHURCH
+INFO 2026-09-16 17:24:06,795 models 30588 31276 ImageBulkOrderLink saved successfully: same-church-1
+INFO 2026-09-16 17:24:06,795 models 30588 31276 Generated slug: same-church-2 for organization: SAME CHURCH
+INFO 2026-09-16 17:24:06,795 models 30588 31276 ImageBulkOrderLink saved successfully: same-church-2
+INFO 2026-09-16 17:24:06,795 models 30588 31276 Generated slug: same-church-3 for organization: SAME CHURCH
+INFO 2026-09-16 17:24:06,795 models 30588 31276 ImageBulkOrderLink saved successfully: same-church-3
+INFO 2026-09-16 17:24:06,810 models 30588 31276 Generated slug: same-church-4 for organization: SAME CHURCH
+INFO 2026-09-16 17:24:06,810 models 30588 31276 ImageBulkOrderLink saved successfully: same-church-4
+.INFO 2026-09-16 17:24:07,081 models 30588 31276 Generated slug: duplicate-church for organization: DUPLICATE CHURCH
+INFO 2026-09-16 17:24:07,081 models 30588 31276 ImageBulkOrderLink saved successfully: duplicate-church
+INFO 2026-09-16 17:24:07,081 models 30588 31276 Generated slug: duplicate-church-1 for organization: DUPLICATE CHURCH
+INFO 2026-09-16 17:24:07,081 models 30588 31276 ImageBulkOrderLink saved successfully: duplicate-church-1
+.INFO 2026-09-16 17:24:07,367 models 30588 31276 Generated slug: string-test-church for organization: STRING TEST CHURCH
+INFO 2026-09-16 17:24:07,367 models 30588 31276 ImageBulkOrderLink saved successfully: string-test-church
+.INFO 2026-09-16 17:24:07,641 models 30588 31276 Generated slug: timestamp-test for organization: TIMESTAMP TEST
+INFO 2026-09-16 17:24:07,641 models 30588 31276 ImageBulkOrderLink saved successfully: timestamp-test
+.INFO 2026-09-16 17:24:07,925 models 30588 31276 Generated slug: update-test for organization: UPDATE TEST
+INFO 2026-09-16 17:24:07,925 models 30588 31276 ImageBulkOrderLink saved successfully: update-test
+INFO 2026-09-16 17:24:07,939 models 30588 31276 ImageBulkOrderLink saved successfully: update-test
+.INFO 2026-09-16 17:24:08,211 models 30588 31276 Generated slug: uuid-test for organization: UUID TEST
+INFO 2026-09-16 17:24:08,211 models 30588 31276 ImageBulkOrderLink saved successfully: uuid-test
+.INFO 2026-09-16 17:24:08,496 models 30588 31276 Generated slug: fields-test for organization: FIELDS TEST
+INFO 2026-09-16 17:24:08,496 models 30588 31276 ImageBulkOrderLink saved successfully: fields-test
+.INFO 2026-09-16 17:24:08,766 models 30588 31276 Generated slug: context-test for organization: CONTEXT TEST
+INFO 2026-09-16 17:24:08,766 models 30588 31276 ImageBulkOrderLink saved successfully: context-test
+..INFO 2026-09-16 17:24:09,338 models 30588 31276 Generated slug: paid-count-test for organization: PAID COUNT TEST
+INFO 2026-09-16 17:24:09,338 models 30588 31276 ImageBulkOrderLink saved successfully: paid-count-test
+INFO 2026-09-16 17:24:09,338 models 30588 31276 Generated reference: IMG-BULK-7472
+INFO 2026-09-16 17:24:09,338 models 30588 31276 Assigned serial_number: 1 for bulk_order: paid-count-test
+INFO 2026-09-16 17:24:09,338 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7472
+INFO 2026-09-16 17:24:09,338 models 30588 31276 Generated reference: IMG-BULK-9548
+INFO 2026-09-16 17:24:09,338 models 30588 31276 Assigned serial_number: 2 for bulk_order: paid-count-test
+INFO 2026-09-16 17:24:09,338 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9548
+..INFO 2026-09-16 17:24:09,907 models 30588 31276 Generated slug: full-test for organization: FULL TEST
+INFO 2026-09-16 17:24:09,907 models 30588 31276 ImageBulkOrderLink saved successfully: full-test
+INFO 2026-09-16 17:24:09,907 models 30588 31276 Generated reference: IMG-BULK-8869
+INFO 2026-09-16 17:24:09,907 models 30588 31276 Assigned serial_number: 1 for bulk_order: full-test
+INFO 2026-09-16 17:24:09,907 models 30588 31276 ImageOrderEntry saved: IMG-BULK-8869
+INFO 2026-09-16 17:24:09,907 models 30588 31276 ImageCouponCode saved successfully: NESTED123
+.INFO 2026-09-16 17:24:10,195 models 30588 31276 Generated slug: url-test for organization: URL TEST
+INFO 2026-09-16 17:24:10,195 models 30588 31276 ImageBulkOrderLink saved successfully: url-test
+.INFO 2026-09-16 17:24:10,478 models 30588 31276 Generated slug: future-deadline for organization: FUTURE DEADLINE
+INFO 2026-09-16 17:24:10,478 models 30588 31276 ImageBulkOrderLink saved successfully: future-deadline
+.INFO 2026-09-16 17:24:10,767 models 30588 31276 Generated slug: past-deadline for organization: PAST DEADLINE
+INFO 2026-09-16 17:24:10,767 models 30588 31276 ImageBulkOrderLink saved successfully: past-deadline
+.INFO 2026-09-16 17:24:11,046 models 30588 31276 Generated slug: field-test for organization: FIELD TEST
+INFO 2026-09-16 17:24:11,046 models 30588 31276 ImageBulkOrderLink saved successfully: field-test
+.INFO 2026-09-16 17:24:11,313 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:11,313 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:24:11,598 models 30588 31276 Generated slug: url-test for organization: URL TEST
+INFO 2026-09-16 17:24:11,598 models 30588 31276 ImageBulkOrderLink saved successfully: url-test
+.INFO 2026-09-16 17:24:11,879 models 30588 31276 Generated slug: no-context for organization: NO CONTEXT
+INFO 2026-09-16 17:24:11,879 models 30588 31276 ImageBulkOrderLink saved successfully: no-context
+.INFO 2026-09-16 17:24:12,730 models 30588 31276 Generated slug: new-church for organization: NEW CHURCH
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageBulkOrderLink saved successfully: new-church
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: JCS0YTWM
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: HVAT6R2H
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: F3MJ4IWS
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: M4C0PI40
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: C5UM6IDN
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: FGMQMSQN
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: YH7V76TA
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: IRL2DYMY
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 4X4Z3R05
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: OTNUFEBY
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: OG0ZIX2T
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: F9Z8JFVS
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: MPGCV6UL
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 3B0GV7CN
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 9MPPCEV2
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: OC4VCZ07
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: MNITLWVV
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: NR7M11UH
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: T52HPQ7C
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: UDBFP5UH
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: F0XH2J1Q
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: XT11T64K
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: YBH5RFE7
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: MDT5KWTO
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 0OVZBNK4
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: IZ0EI7AZ
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: FXMK01NM
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 3CMRONK0
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 4RNZ16UH
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: CM93OA6M
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 17I7U4F5
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 87JSIRPN
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 0IZISELS
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: JEQ3PNDK
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 58HLORGP
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 1L6HIKXJ
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: T73X7X62
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: OZCD8SPO
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 6JL359C1
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 0AP4IQ42
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: OIGPR0Y2
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: QATBVCYT
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: 3JIB4RC6
+INFO 2026-09-16 17:24:12,730 models 30588 31276 ImageCouponCode saved successfully: TY2EI190
+INFO 2026-09-16 17:24:12,746 models 30588 31276 ImageCouponCode saved successfully: ST08CVYK
+INFO 2026-09-16 17:24:12,746 models 30588 31276 ImageCouponCode saved successfully: MNJM6DPS
+INFO 2026-09-16 17:24:12,746 models 30588 31276 ImageCouponCode saved successfully: IU2DHI63
+INFO 2026-09-16 17:24:12,746 models 30588 31276 ImageCouponCode saved successfully: 4FQ0GTPF
+INFO 2026-09-16 17:24:12,746 models 30588 31276 ImageCouponCode saved successfully: L9NPZMHO
+INFO 2026-09-16 17:24:12,746 models 30588 31276 ImageCouponCode saved successfully: YJ2GOSTO
+INFO 2026-09-16 17:24:12,746 utils 30588 31276 Generated 50 coupon codes for image bulk order: 4e390111-4274-4abf-9719-a574e7abfd9d
+.WARNING 2026-09-16 17:24:13,599 log 30588 31276 Unauthorized: /api/image_bulk_orders/links/
+INFO 2026-09-16 17:24:13,604 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:13,604 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: AVM0RO9Z
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: LYVATI8N
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 3CT1TJJU
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 17D8I14B
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: O9AHA5PD
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: BKMQPXC1
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: RTW5GRY8
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: J5O4F04I
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: UGLYVNOC
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: WN2G8OUL
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: EMLO6AJD
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: QA97BY3F
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 1ZJHKCC0
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: ITEV7OHH
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: L3GAAVA2
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: U5NZV450
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: W8URNM1A
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: JMC1G3MV
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: GLM8YWGH
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 99JOFBRH
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: OBWRDKNZ
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 1I4BVUM1
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: T5P0M3M5
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 0ZM9SJBF
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: YWZ0BRHO
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 0YHJ9355
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 2OC8NLCD
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: GT8H6OBU
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: HTPZI0AW
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: T534AN6F
+INFO 2026-09-16 17:24:13,606 models 30588 31276 ImageCouponCode saved successfully: 6QSWTC2Q
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: VCSOLNHU
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: MMY6ZZE8
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: IVDLRNSK
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: C2TMEEIN
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 7818CEHQ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: OCFYOUGV
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: WUYWDOWG
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 2JH57CB4
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 8LSSCMWK
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 3FQAOSZZ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: ECF0TJMB
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: NZPH0DPX
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: SZVHS897
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: PKM009TQ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: QY2PKT0S
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: ESE5HSN4
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 99MRZJOE
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 0DS472Z9
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: G6CZIZG3
+INFO 2026-09-16 17:24:13,615 utils 30588 31276 Generated 50 coupon codes for image bulk order: 099d7455-0ccc-42de-82b6-a54b893bbaef
+INFO 2026-09-16 17:24:13,615 models 30588 31276 Generated slug: test-church-1 for organization: TEST CHURCH
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageBulkOrderLink saved successfully: test-church-1
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: HDGFEQIW
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: V8J96XFK
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: R1F9C0WK
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 30FPEI99
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: WCI6LZO7
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: WSA7MR1L
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: SUJD2CM7
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 8CANELAZ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 929RU3OS
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: PF0REAQJ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 3J1S1E77
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: U70MMKW1
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: LGOZO0LP
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 0FPHQ4NJ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 8H85DKDO
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 4Y5JYERZ
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 75R5HJRM
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: 5YFYV9BK
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: EKRH9H5E
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: GYMRN0FB
+INFO 2026-09-16 17:24:13,615 models 30588 31276 ImageCouponCode saved successfully: HTPQ6HE0
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: DMQV1LBC
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: T7273LKY
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: KY61UX7C
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 9CZRRMND
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: UQYZ78QI
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: AQV028PX
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: SX623F1N
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: QM59GS31
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 64TVZCQ3
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 2JO2VQ27
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: NRRVZLV5
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: NIOX0ORZ
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 4L7WE80I
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: JBY1J9CZ
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 5G0W8NQC
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 3BZG07JV
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: ZRYH6W11
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 2MMXFO65
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: BLF7LVSD
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: KZ88X19H
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: V2QFB5CV
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: E0FCXDUM
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: B1PZXZUQ
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: A8CF7PJ2
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 3XCW53OG
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: C3863CK8
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: NRJ4WF2V
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: 9DES8AWS
+INFO 2026-09-16 17:24:13,631 models 30588 31276 ImageCouponCode saved successfully: AF2ITIWI
+INFO 2026-09-16 17:24:13,631 utils 30588 31276 Generated 50 coupon codes for image bulk order: b7d4e7b7-9666-4f1c-8800-eee551a2e32d
+.INFO 2026-09-16 17:24:14,469 models 30588 31276 Generated slug: coupon-test for organization: COUPON TEST
+INFO 2026-09-16 17:24:14,469 models 30588 31276 ImageBulkOrderLink saved successfully: coupon-test
+.INFO 2026-09-16 17:24:15,331 models 30588 31276 Generated slug: default-coupon-test for organization: DEFAULT COUPON TEST
+INFO 2026-09-16 17:24:15,331 models 30588 31276 ImageBulkOrderLink saved successfully: default-coupon-test
+.INFO 2026-09-16 17:24:16,178 models 30588 31276 Generated slug: invalid-count for organization: INVALID COUNT
+INFO 2026-09-16 17:24:16,178 models 30588 31276 ImageBulkOrderLink saved successfully: invalid-count
+WARNING 2026-09-16 17:24:16,196 log 30588 31276 Bad Request: /api/image_bulk_orders/links/invalid-count/generate_coupons/
+WARNING 2026-09-16 17:24:16,209 log 30588 31276 Bad Request: /api/image_bulk_orders/links/invalid-count/generate_coupons/
+.INFO 2026-09-16 17:24:17,034 models 30588 31276 Generated slug: regular-coupon-test for organization: REGULAR COUPON TEST
+INFO 2026-09-16 17:24:17,034 models 30588 31276 ImageBulkOrderLink saved successfully: regular-coupon-test
+WARNING 2026-09-16 17:24:17,066 log 30588 31276 Forbidden: /api/image_bulk_orders/links/regular-coupon-test/generate_coupons/
+.INFO 2026-09-16 17:24:17,899 models 30588 31276 Generated slug: user-church for organization: USER CHURCH
+INFO 2026-09-16 17:24:17,899 models 30588 31276 ImageBulkOrderLink saved successfully: user-church
+INFO 2026-09-16 17:24:17,899 models 30588 31276 Generated slug: other-church for organization: OTHER CHURCH
+INFO 2026-09-16 17:24:17,899 models 30588 31276 ImageBulkOrderLink saved successfully: other-church
+.INFO 2026-09-16 17:24:18,762 models 30588 31276 Generated slug: paid-orders-test for organization: PAID ORDERS TEST
+INFO 2026-09-16 17:24:18,762 models 30588 31276 ImageBulkOrderLink saved successfully: paid-orders-test
+INFO 2026-09-16 17:24:18,762 models 30588 31276 Generated reference: IMG-BULK-5958
+INFO 2026-09-16 17:24:18,766 models 30588 31276 Assigned serial_number: 1 for bulk_order: paid-orders-test
+INFO 2026-09-16 17:24:18,766 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5958
+INFO 2026-09-16 17:24:18,766 models 30588 31276 Generated reference: IMG-BULK-6802
+INFO 2026-09-16 17:24:18,766 models 30588 31276 Assigned serial_number: 2 for bulk_order: paid-orders-test
+INFO 2026-09-16 17:24:18,766 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6802
+.INFO 2026-09-16 17:24:19,633 models 30588 31276 Generated slug: retrieve-test for organization: RETRIEVE TEST
+INFO 2026-09-16 17:24:19,633 models 30588 31276 ImageBulkOrderLink saved successfully: retrieve-test
+.INFO 2026-09-16 17:24:20,505 models 30588 31276 Generated slug: stats-test for organization: STATS TEST
+INFO 2026-09-16 17:24:20,505 models 30588 31276 ImageBulkOrderLink saved successfully: stats-test
+INFO 2026-09-16 17:24:20,505 models 30588 31276 Generated reference: IMG-BULK-9158
+INFO 2026-09-16 17:24:20,505 models 30588 31276 Assigned serial_number: 1 for bulk_order: stats-test
+INFO 2026-09-16 17:24:20,505 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9158
+INFO 2026-09-16 17:24:20,505 models 30588 31276 Generated reference: IMG-BULK-9357
+INFO 2026-09-16 17:24:20,505 models 30588 31276 Assigned serial_number: 2 for bulk_order: stats-test
+INFO 2026-09-16 17:24:20,505 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9357
+.INFO 2026-09-16 17:24:21,377 models 30588 31276 Generated slug: submit-test for organization: SUBMIT TEST
+INFO 2026-09-16 17:24:21,377 models 30588 31276 ImageBulkOrderLink saved successfully: submit-test
+INFO 2026-09-16 17:24:21,404 models 30588 31276 Generated reference: IMG-BULK-6293
+INFO 2026-09-16 17:24:21,404 models 30588 31276 Assigned serial_number: 1 for bulk_order: submit-test
+INFO 2026-09-16 17:24:21,404 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6293
+INFO 2026-09-16 17:24:21,404 background_utils 30588 31276 Email queued for async sending: Order Confirmation - SUBMIT TEST
+.INFO 2026-09-16 17:24:21,409 background_utils 30588 31760 Email sent successfully: Order Confirmation - SUBMIT TEST to ['test@example.com']
+WARNING 2026-09-16 17:24:22,278 log 30588 31276 Not Found: /api/image_bulk_orders/links/non-existent/submit_order/
+.INFO 2026-09-16 17:24:22,564 models 30588 31276 Generated slug: inline-test for organization: INLINE TEST
+INFO 2026-09-16 17:24:22,564 models 30588 31276 ImageBulkOrderLink saved successfully: inline-test
+.INFO 2026-09-16 17:24:22,848 models 30588 31276 Generated slug: inline-test for organization: INLINE TEST
+INFO 2026-09-16 17:24:22,848 models 30588 31276 ImageBulkOrderLink saved successfully: inline-test
+.INFO 2026-09-16 17:24:23,117 models 30588 31276 Generated slug: inline-test for organization: INLINE TEST
+INFO 2026-09-16 17:24:23,117 models 30588 31276 ImageBulkOrderLink saved successfully: inline-test
+.INFO 2026-09-16 17:24:23,418 models 30588 31276 Generated slug: inline-test for organization: INLINE TEST
+INFO 2026-09-16 17:24:23,418 models 30588 31276 ImageBulkOrderLink saved successfully: inline-test
+.INFO 2026-09-16 17:24:23,688 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:23,688 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:23,688 models 30588 31276 ImageCouponCode saved successfully: RELATION123
+.INFO 2026-09-16 17:24:23,972 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:23,972 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:23,972 models 30588 31276 ImageCouponCode saved successfully: CASCADE123
+.INFO 2026-09-16 17:24:24,257 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:24,257 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:24,257 models 30588 31276 ImageCouponCode saved successfully: AAAAAAAAAAAAAAAAAAAA
+.INFO 2026-09-16 17:24:24,542 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:24,542 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:24,542 models 30588 31276 ImageCouponCode saved successfully: UNIQUE123
+ERROR 2026-09-16 17:24:24,542 models 30588 31276 Error saving ImageCouponCode: UNIQUE constraint failed: image_bulk_orders_imagecouponcode.code
+.INFO 2026-09-16 17:24:24,825 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:24,828 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:24,828 models 30588 31276 Generated slug: another-church for organization: ANOTHER CHURCH
+INFO 2026-09-16 17:24:24,828 models 30588 31276 ImageBulkOrderLink saved successfully: another-church
+INFO 2026-09-16 17:24:24,828 models 30588 31276 ImageCouponCode saved successfully: GLOBAL123
+ERROR 2026-09-16 17:24:24,828 models 30588 31276 Error saving ImageCouponCode: UNIQUE constraint failed: image_bulk_orders_imagecouponcode.code
+.INFO 2026-09-16 17:24:25,111 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:25,111 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:25,111 models 30588 31276 ImageCouponCode saved successfully: TEST12345
+.INFO 2026-09-16 17:24:25,395 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:25,395 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:25,395 models 30588 31276 ImageCouponCode saved successfully: TIME123
+.INFO 2026-09-16 17:24:25,678 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:25,678 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:25,678 models 30588 31276 ImageCouponCode saved successfully: USED123
+INFO 2026-09-16 17:24:25,678 models 30588 31276 ImageCouponCode saved successfully: USED123
+.INFO 2026-09-16 17:24:25,948 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:25,963 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:25,963 models 30588 31276 ImageCouponCode saved successfully: DEFAULT123
+.INFO 2026-09-16 17:24:26,242 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:26,242 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:26,242 models 30588 31276 ImageCouponCode saved successfully: FIRST
+INFO 2026-09-16 17:24:26,242 models 30588 31276 ImageCouponCode saved successfully: SECOND
+.INFO 2026-09-16 17:24:26,518 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:26,518 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:26,518 models 30588 31276 ImageCouponCode saved successfully: STR123
+.INFO 2026-09-16 17:24:26,802 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:26,802 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:26,802 models 30588 31276 ImageCouponCode saved successfully: USED123
+.INFO 2026-09-16 17:24:27,087 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:27,087 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:27,087 models 30588 31276 ImageCouponCode saved successfully: UUID123
+.INFO 2026-09-16 17:24:27,371 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:27,371 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:27,371 models 30588 31276 ImageCouponCode saved successfully: FIELDS123
+.INFO 2026-09-16 17:24:27,657 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:27,657 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:27,657 models 30588 31276 ImageCouponCode saved successfully: RELATION123
+.INFO 2026-09-16 17:24:27,940 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:27,940 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:24:28,223 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:28,223 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:28,223 models 30588 31276 ImageCouponCode saved successfully: TEST12345
+.INFO 2026-09-16 17:24:28,780 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:28,780 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+WARNING 2026-09-16 17:24:28,796 log 30588 31276 Unauthorized: /api/image_bulk_orders/coupons/
+WARNING 2026-09-16 17:24:28,796 log 30588 31276 Forbidden: /api/image_bulk_orders/coupons/
+.INFO 2026-09-16 17:24:29,366 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:29,366 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:29,366 models 30588 31276 ImageCouponCode saved successfully: VALIDATE123
+.INFO 2026-09-16 17:24:29,950 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:29,950 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:29,950 models 30588 31276 ImageCouponCode saved successfully: USEDCODE
+.INFO 2026-09-16 17:24:30,536 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:30,536 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:30,536 models 30588 31276 ImageCouponCode saved successfully: ADMINONLY
+WARNING 2026-09-16 17:24:30,620 log 30588 31276 Forbidden: /api/image_bulk_orders/coupons/0c49ee91-9489-4f8f-8c20-3fd94df3298f/validate_coupon/
+.INFO 2026-09-16 17:24:30,900 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:30,900 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:30,900 models 30588 31276 Generated reference: IMG-BULK-4092
+INFO 2026-09-16 17:24:30,900 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:30,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4092
+.INFO 2026-09-16 17:24:31,185 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:31,185 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:31,185 models 30588 31276 Generated reference: IMG-BULK-4688
+INFO 2026-09-16 17:24:31,185 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:31,185 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4688
+INFO 2026-09-16 17:24:31,185 models 30588 31276 ImageCouponCode saved successfully: TEST123
+INFO 2026-09-16 17:24:31,185 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4688
+.INFO 2026-09-16 17:24:31,471 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:31,471 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:31,471 models 30588 31276 Generated reference: IMG-BULK-1193
+INFO 2026-09-16 17:24:31,471 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:31,471 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1193
+.INFO 2026-09-16 17:24:31,755 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:31,755 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:31,755 models 30588 31276 Generated reference: IMG-BULK-9424
+INFO 2026-09-16 17:24:31,755 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:31,755 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9424
+.INFO 2026-09-16 17:24:32,040 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:32,040 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:32,040 models 30588 31276 Generated reference: IMG-BULK-3362
+INFO 2026-09-16 17:24:32,040 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:32,040 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3362
+INFO 2026-09-16 17:24:32,040 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3362
+.INFO 2026-09-16 17:24:32,325 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:32,325 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:32,325 models 30588 31276 Generated reference: IMG-BULK-9797
+INFO 2026-09-16 17:24:32,325 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:32,325 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9797
+.INFO 2026-09-16 17:24:32,610 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:32,610 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:32,610 models 30588 31276 Generated reference: IMG-BULK-6950
+INFO 2026-09-16 17:24:32,610 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:32,610 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6950
+.INFO 2026-09-16 17:24:32,895 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:32,895 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:32,895 models 30588 31276 Generated reference: IMG-BULK-1147
+INFO 2026-09-16 17:24:32,895 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:32,895 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1147
+.INFO 2026-09-16 17:24:33,179 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:33,179 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:33,179 models 30588 31276 Generated reference: IMG-BULK-7755
+INFO 2026-09-16 17:24:33,179 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:33,179 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7755
+.INFO 2026-09-16 17:24:33,462 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:33,462 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:33,462 models 30588 31276 Generated reference: IMG-BULK-4458
+INFO 2026-09-16 17:24:33,462 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:33,462 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4458
+.INFO 2026-09-16 17:24:33,746 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:33,746 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:33,746 models 30588 31276 Generated reference: IMG-BULK-7520
+INFO 2026-09-16 17:24:33,746 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:33,746 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7520
+INFO 2026-09-16 17:24:33,746 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7520
+.INFO 2026-09-16 17:24:34,031 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:34,031 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:34,031 models 30588 31276 Generated reference: IMG-BULK-7699
+INFO 2026-09-16 17:24:34,031 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:34,031 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7699
+.INFO 2026-09-16 17:24:34,316 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:34,316 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:34,316 models 30588 31276 Generated reference: IMG-BULK-5229
+INFO 2026-09-16 17:24:34,316 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:34,316 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5229
+.INFO 2026-09-16 17:24:34,600 models 30588 31276 Generated slug: admin-test for organization: ADMIN TEST
+INFO 2026-09-16 17:24:34,600 models 30588 31276 ImageBulkOrderLink saved successfully: admin-test
+INFO 2026-09-16 17:24:34,600 models 30588 31276 Generated reference: IMG-BULK-6637
+INFO 2026-09-16 17:24:34,600 models 30588 31276 Assigned serial_number: 1 for bulk_order: admin-test
+INFO 2026-09-16 17:24:34,600 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6637
+.INFO 2026-09-16 17:24:34,884 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:34,884 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:34,884 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:34,884 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:34,884 models 30588 31276 ImageCouponCode saved successfully: LOWERCASE
+.INFO 2026-09-16 17:24:35,169 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:35,169 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:35,169 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:35,169 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+.INFO 2026-09-16 17:24:35,459 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:35,459 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:35,459 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:35,459 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:35,459 models 30588 31276 Generated reference: IMG-BULK-7851
+INFO 2026-09-16 17:24:35,459 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:35,459 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7851
+.INFO 2026-09-16 17:24:35,739 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:35,739 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:35,739 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:35,739 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:35,739 models 30588 31276 Generated reference: IMG-BULK-1455
+INFO 2026-09-16 17:24:35,739 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:35,739 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1455
+.INFO 2026-09-16 17:24:36,028 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:36,028 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:36,028 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:36,028 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+.INFO 2026-09-16 17:24:36,306 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:36,306 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:36,306 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:36,306 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:36,306 models 30588 31276 Generated reference: IMG-BULK-3376
+INFO 2026-09-16 17:24:36,306 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:36,306 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3376
+.INFO 2026-09-16 17:24:36,592 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:36,592 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:36,592 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:36,592 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:36,592 models 30588 31276 Generated reference: IMG-BULK-8783
+INFO 2026-09-16 17:24:36,592 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:36,592 models 30588 31276 ImageOrderEntry saved: IMG-BULK-8783
+.INFO 2026-09-16 17:24:36,877 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:36,877 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:36,877 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:36,877 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:36,877 models 30588 31276 Generated reference: IMG-BULK-4045
+INFO 2026-09-16 17:24:36,877 models 30588 31276 Assigned serial_number: 1 for bulk_order: no-branding-church
+INFO 2026-09-16 17:24:36,877 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4045
+.INFO 2026-09-16 17:24:37,162 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:37,162 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:37,162 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:37,162 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:37,162 models 30588 31276 Generated slug: other-church for organization: OTHER CHURCH
+INFO 2026-09-16 17:24:37,162 models 30588 31276 ImageBulkOrderLink saved successfully: other-church
+INFO 2026-09-16 17:24:37,162 models 30588 31276 ImageCouponCode saved successfully: OTHER123
+.INFO 2026-09-16 17:24:37,431 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:37,431 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:37,431 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:37,431 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:37,431 models 30588 31276 Generated slug: expired-church for organization: EXPIRED CHURCH
+INFO 2026-09-16 17:24:37,431 models 30588 31276 ImageBulkOrderLink saved successfully: expired-church
+.INFO 2026-09-16 17:24:37,717 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:37,717 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:37,717 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:37,717 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+.INFO 2026-09-16 17:24:38,002 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:38,002 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:38,002 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:38,002 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+ERROR 2026-09-16 17:24:38,002 serializers 30588 31276 Error validating image: [ErrorDetail(string="Invalid image type 'application/pdf'. Allowed types: JPEG, PNG, GIF, WebP", code='invalid')]
+.INFO 2026-09-16 17:24:38,287 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:38,287 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:38,287 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:38,287 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+.INFO 2026-09-16 17:24:38,572 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:38,572 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:38,572 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:38,572 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:38,572 serializers 30588 31276 Image validated successfully: image/gif, size: 0.20KB
+.INFO 2026-09-16 17:24:38,856 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:38,856 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:38,856 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:38,856 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:38,856 serializers 30588 31276 Image validated successfully: image/jpeg, size: 0.81KB
+.INFO 2026-09-16 17:24:39,140 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:39,140 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:39,140 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:39,140 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:39,156 serializers 30588 31276 Image validated successfully: image/png, size: 0.28KB
+.INFO 2026-09-16 17:24:39,442 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:39,442 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:39,442 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:39,442 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:39,442 serializers 30588 31276 Image validated successfully: image/webp, size: 0.28KB
+.INFO 2026-09-16 17:24:39,729 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:39,729 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:39,729 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:39,729 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:39,729 models 30588 31276 ImageCouponCode saved successfully: USED123
+.INFO 2026-09-16 17:24:39,998 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:39,998 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:39,998 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:39,998 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+.INFO 2026-09-16 17:24:40,290 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:40,290 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:40,290 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:40,290 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+INFO 2026-09-16 17:24:40,290 models 30588 31276 ImageCouponCode saved successfully: VALID123
+.INFO 2026-09-16 17:24:40,567 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:40,567 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:40,567 models 30588 31276 Generated slug: no-branding-church for organization: NO BRANDING CHURCH
+INFO 2026-09-16 17:24:40,567 models 30588 31276 ImageBulkOrderLink saved successfully: no-branding-church
+.INFO 2026-09-16 17:24:40,852 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:40,852 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:40,852 models 30588 31276 Generated reference: IMG-BULK-4189
+INFO 2026-09-16 17:24:40,852 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:40,852 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4189
+WARNING 2026-09-16 17:24:40,883 log 30588 31276 Bad Request: /api/image_bulk_orders/orders/af7f3da5-4ec3-4a3e-887b-1f5ae7ec2ffb/initialize_payment/
+.INFO 2026-09-16 17:24:41,152 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:41,152 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:24:41,469 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:41,469 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:41,469 models 30588 31276 Generated reference: IMG-BULK-5801
+INFO 2026-09-16 17:24:41,469 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:41,469 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5801
+.INFO 2026-09-16 17:24:41,772 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:41,772 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:41,772 models 30588 31276 Generated reference: IMG-BULK-1478
+INFO 2026-09-16 17:24:41,772 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:41,772 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1478
+INFO 2026-09-16 17:24:41,787 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1478
+INFO 2026-09-16 17:24:41,787 views 30588 31276 Recovered image bulk order payment during verify step: IMG-BULK-1478
+.INFO 2026-09-16 17:24:42,078 models 30588 31276 Generated slug: webhook-test for organization: WEBHOOK TEST
+INFO 2026-09-16 17:24:42,078 models 30588 31276 ImageBulkOrderLink saved successfully: webhook-test
+INFO 2026-09-16 17:24:42,078 models 30588 31276 Generated reference: IMG-BULK-4777
+INFO 2026-09-16 17:24:42,078 models 30588 31276 Assigned serial_number: 1 for bulk_order: webhook-test
+INFO 2026-09-16 17:24:42,078 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4777
+WARNING 2026-09-16 17:24:42,095 security 30588 31276 Invalid webhook signature. Expected: f33754a4c9..., Got: invalid_si...
+ERROR 2026-09-16 17:24:42,095 views 30588 31276 Invalid webhook signature
+WARNING 2026-09-16 17:24:42,095 log 30588 31276 Unauthorized: /api/image_bulk_orders/payment/callback/
+.INFO 2026-09-16 17:24:42,421 models 30588 31276 Generated slug: webhook-test for organization: WEBHOOK TEST
+INFO 2026-09-16 17:24:42,421 models 30588 31276 ImageBulkOrderLink saved successfully: webhook-test
+INFO 2026-09-16 17:24:42,421 models 30588 31276 Generated reference: IMG-BULK-1397
+INFO 2026-09-16 17:24:42,421 models 30588 31276 Assigned serial_number: 1 for bulk_order: webhook-test
+INFO 2026-09-16 17:24:42,421 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1397
+WARNING 2026-09-16 17:24:42,437 security 30588 31276 Invalid webhook signature. Expected: 3ddeedfe5f..., Got: test_signa...
+ERROR 2026-09-16 17:24:42,437 views 30588 31276 Invalid webhook signature
+WARNING 2026-09-16 17:24:42,437 log 30588 31276 Unauthorized: /api/image_bulk_orders/payment/callback/
+.INFO 2026-09-16 17:24:42,754 models 30588 31276 Generated slug: webhook-test for organization: WEBHOOK TEST
+INFO 2026-09-16 17:24:42,754 models 30588 31276 ImageBulkOrderLink saved successfully: webhook-test
+INFO 2026-09-16 17:24:42,754 models 30588 31276 Generated reference: IMG-BULK-1840
+INFO 2026-09-16 17:24:42,754 models 30588 31276 Assigned serial_number: 1 for bulk_order: webhook-test
+INFO 2026-09-16 17:24:42,754 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1840
+WARNING 2026-09-16 17:24:42,785 security 30588 31276 Invalid webhook signature. Expected: 0803b50f32..., Got: test_signa...
+ERROR 2026-09-16 17:24:42,785 views 30588 31276 Invalid webhook signature
+WARNING 2026-09-16 17:24:42,785 log 30588 31276 Unauthorized: /api/image_bulk_orders/payment/callback/
+.INFO 2026-09-16 17:24:43,102 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:43,102 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:43,102 models 30588 31276 Generated reference: IMG-BULK-6987
+INFO 2026-09-16 17:24:43,102 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,102 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6987
+.INFO 2026-09-16 17:24:43,425 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:43,425 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:43,425 models 30588 31276 Generated reference: IMG-BULK-1858
+INFO 2026-09-16 17:24:43,425 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,425 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1858
+.INFO 2026-09-16 17:24:43,739 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:43,739 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:43,739 models 30588 31276 Generated reference: IMG-BULK-2263
+INFO 2026-09-16 17:24:43,739 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,739 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2263
+INFO 2026-09-16 17:24:43,739 models 30588 31276 Generated reference: IMG-BULK-5365
+INFO 2026-09-16 17:24:43,739 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,739 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5365
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-4143
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 3 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4143
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-5094
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 4 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5094
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-3919
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 5 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3919
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-4521
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 6 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4521
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-8119
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 7 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-8119
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-2420
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 8 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2420
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-6202
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 9 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6202
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Generated reference: IMG-BULK-1039
+INFO 2026-09-16 17:24:43,751 models 30588 31276 Assigned serial_number: 10 for bulk_order: test-church
+INFO 2026-09-16 17:24:43,751 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1039
+.INFO 2026-09-16 17:24:44,066 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:44,066 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:44,066 models 30588 31276 ImageCouponCode saved successfully: DELETE123
+INFO 2026-09-16 17:24:44,066 models 30588 31276 Generated reference: IMG-BULK-8591
+INFO 2026-09-16 17:24:44,066 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:44,066 models 30588 31276 ImageOrderEntry saved: IMG-BULK-8591
+.INFO 2026-09-16 17:24:44,399 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:44,399 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:44,399 models 30588 31276 ImageCouponCode saved successfully: TEST123
+INFO 2026-09-16 17:24:44,399 models 30588 31276 Generated reference: IMG-BULK-2680
+INFO 2026-09-16 17:24:44,399 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:44,399 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2680
+.INFO 2026-09-16 17:24:44,715 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:44,715 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:44,715 models 30588 31276 Generated reference: IMG-BULK-6200
+INFO 2026-09-16 17:24:44,715 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:44,715 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6200
+.INFO 2026-09-16 17:24:45,042 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:45,042 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:45,042 models 30588 31276 Generated reference: IMG-BULK-5055
+INFO 2026-09-16 17:24:45,042 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:45,042 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5055
+.INFO 2026-09-16 17:24:45,348 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:45,348 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:45,348 models 30588 31276 Generated reference: IMG-BULK-7043
+INFO 2026-09-16 17:24:45,364 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:45,364 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7043
+.INFO 2026-09-16 17:24:45,681 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:45,681 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+.INFO 2026-09-16 17:24:45,998 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:45,998 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:45,998 models 30588 31276 Generated reference: IMG-BULK-5600
+INFO 2026-09-16 17:24:45,998 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:45,998 models 30588 31276 ImageOrderEntry saved: IMG-BULK-5600
+.INFO 2026-09-16 17:24:46,316 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:46,316 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:46,316 models 30588 31276 Generated reference: IMG-BULK-1339
+INFO 2026-09-16 17:24:46,316 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:46,316 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1339
+INFO 2026-09-16 17:24:46,316 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1339
+.INFO 2026-09-16 17:24:46,654 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:46,654 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:46,654 models 30588 31276 Generated reference: IMG-BULK-3611
+INFO 2026-09-16 17:24:46,654 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:46,654 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3611
+.INFO 2026-09-16 17:24:46,969 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:46,969 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:46,969 models 30588 31276 Generated reference: IMG-BULK-1486
+INFO 2026-09-16 17:24:46,969 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:46,969 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1486
+.INFO 2026-09-16 17:24:47,293 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:47,293 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:47,293 models 30588 31276 Generated reference: IMG-BULK-2644
+INFO 2026-09-16 17:24:47,293 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:47,293 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2644
+INFO 2026-09-16 17:24:47,302 models 30588 31276 Generated reference: IMG-BULK-9760
+INFO 2026-09-16 17:24:47,302 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:24:47,302 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9760
+.INFO 2026-09-16 17:24:47,618 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:47,618 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:47,618 models 30588 31276 Generated reference: IMG-BULK-9572
+INFO 2026-09-16 17:24:47,618 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:47,618 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9572
+.INFO 2026-09-16 17:24:47,935 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:47,935 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:47,935 models 30588 31276 Generated reference: IMG-BULK-9957
+INFO 2026-09-16 17:24:47,935 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:47,935 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9957
+INFO 2026-09-16 17:24:47,935 models 30588 31276 Generated reference: IMG-BULK-2793
+INFO 2026-09-16 17:24:47,935 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:24:47,935 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2793
+INFO 2026-09-16 17:24:47,935 models 30588 31276 Generated reference: IMG-BULK-1439
+INFO 2026-09-16 17:24:47,935 models 30588 31276 Assigned serial_number: 3 for bulk_order: test-church
+INFO 2026-09-16 17:24:47,935 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1439
+.INFO 2026-09-16 17:24:48,252 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:48,252 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:48,252 models 30588 31276 Generated slug: another-church for organization: ANOTHER CHURCH
+INFO 2026-09-16 17:24:48,252 models 30588 31276 ImageBulkOrderLink saved successfully: another-church
+INFO 2026-09-16 17:24:48,252 models 30588 31276 Generated reference: IMG-BULK-2128
+INFO 2026-09-16 17:24:48,252 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,252 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2128
+INFO 2026-09-16 17:24:48,252 models 30588 31276 Generated reference: IMG-BULK-1278
+INFO 2026-09-16 17:24:48,268 models 30588 31276 Assigned serial_number: 1 for bulk_order: another-church
+INFO 2026-09-16 17:24:48,268 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1278
+INFO 2026-09-16 17:24:48,268 models 30588 31276 Generated reference: IMG-BULK-6009
+INFO 2026-09-16 17:24:48,268 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,268 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6009
+.INFO 2026-09-16 17:24:48,583 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:48,583 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:48,583 models 30588 31276 Generated reference: IMG-BULK-9972
+INFO 2026-09-16 17:24:48,583 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,583 models 30588 31276 ImageOrderEntry saved: IMG-BULK-9972
+.INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-2136
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2136
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-3822
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 2 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3822
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-7227
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 3 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-7227
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-6939
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 4 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6939
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-1257
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 5 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-1257
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-8583
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 6 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-8583
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Generated reference: IMG-BULK-4688
+INFO 2026-09-16 17:24:48,900 models 30588 31276 Assigned serial_number: 7 for bulk_order: test-church
+INFO 2026-09-16 17:24:48,900 models 30588 31276 ImageOrderEntry saved: IMG-BULK-4688
+.INFO 2026-09-16 17:24:49,217 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:49,217 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:49,217 models 30588 31276 Generated reference: IMG-BULK-6971
+INFO 2026-09-16 17:24:49,217 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:49,217 models 30588 31276 ImageOrderEntry saved: IMG-BULK-6971
+.INFO 2026-09-16 17:24:49,535 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:49,550 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:49,550 models 30588 31276 Generated reference: IMG-BULK-2481
+INFO 2026-09-16 17:24:49,550 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:49,550 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2481
+.INFO 2026-09-16 17:24:49,867 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:49,867 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:49,867 models 30588 31276 Generated reference: IMG-BULK-3790
+INFO 2026-09-16 17:24:49,867 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:49,867 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3790
+INFO 2026-09-16 17:24:49,882 models 30588 31276 ImageOrderEntry saved: IMG-BULK-3790
+.INFO 2026-09-16 17:24:50,199 models 30588 31276 Generated slug: test-church for organization: TEST CHURCH
+INFO 2026-09-16 17:24:50,199 models 30588 31276 ImageBulkOrderLink saved successfully: test-church
+INFO 2026-09-16 17:24:50,199 models 30588 31276 Generated reference: IMG-BULK-2341
+INFO 2026-09-16 17:24:50,199 models 30588 31276 Assigned serial_number: 1 for bulk_order: test-church
+INFO 2026-09-16 17:24:50,199 models 30588 31276 ImageOrderEntry saved: IMG-BULK-2341
+.
+----------------------------------------------------------------------
+Ran 179 tests in 59.915s
+
+OK
+Destroying test database for alias 'default'...

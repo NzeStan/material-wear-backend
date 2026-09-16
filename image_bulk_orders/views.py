@@ -229,6 +229,8 @@ class ImageBulkOrderLinkViewSet(viewsets.ModelViewSet):
             **coupon_stats,
             "organization_name": bulk_order.organization_name,
             "price_per_item": str(bulk_order.price_per_item),
+            "payment_deadline": bulk_order.payment_deadline,
+            "custom_branding_enabled": bulk_order.custom_branding_enabled,
         }
 
         # Cache for 5 minutes

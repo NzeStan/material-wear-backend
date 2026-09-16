@@ -9,6 +9,12 @@ ENV PYTHONUNBUFFERED 1
 # generation) — needed at runtime too, not just build time, since Django's
 # admin autodiscover imports orderitem_generation.api_views (which imports
 # weasyprint) on every app startup, not only during collectstatic.
+# fonts-symbola: this base image ships with NO fonts covering Unicode
+# symbol/dingbat ranges (✓ U+2713, 📊 U+1F4CA, 📞 U+1F4DE, etc. — used
+# throughout the PDF/email templates) — without it, Cairo has no glyph to
+# draw and WeasyPrint falls back to rendering the raw codepoint number
+# instead of the symbol. Symbola is a monochrome font (not color-emoji),
+# which is what Cairo can actually render reliably in a PDF anyway.
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
@@ -21,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     shared-mime-info \
     libmagic1 \
+    fonts-symbola \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /code
