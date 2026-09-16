@@ -32,10 +32,24 @@ Cloudinary-folder sync mode:
 -----------------------------
 For bulk-uploading straight from your computer: upload the images yourself
 via Cloudinary's own Media Library (cloudinary.com console, drag-and-drop
-into a folder, e.g. "feed_images") — no server involved — then run this
-command with --cloudinary-folder to scan that Cloudinary folder via the
-Admin API and create any feed.Image rows that don't exist yet. This IS
-deduped: re-running only picks up images added since the last sync.
+into a folder) — no server involved — then run this command with
+--cloudinary-folder to scan that Cloudinary folder via the Admin API and
+create any feed.Image rows that don't exist yet. This IS deduped:
+re-running only picks up images added since the last sync.
+
+IMPORTANT: this project's Cloudinary storage backend (MediaCloudinaryStorage)
+always serves feed/product images from under a "media/" folder — every
+image ever uploaded *through this app* (admin, upload_images, upload_products)
+automatically lands there. An image dropped directly into Cloudinary's
+console under a folder that ISN'T under "media/" (e.g. plain "feed_images",
+or an existing folder like "hood_pics") will 404 once this app builds its
+URL, because the storage unconditionally prepends "media/" when reading.
+So: in Cloudinary's console, create your upload folder AS "media/<something>"
+(e.g. "media/feed_images") — a brand new folder, not one already holding
+other site images — and pass that same path to --cloudinary-folder. This
+command auto-prepends "media/" if you forget it, but it can't tell a
+folder you *meant* to be under media from one you didn't, so pick a
+dedicated, empty folder for this rather than reusing an existing one.
 
 Usage:
 ------
@@ -43,8 +57,8 @@ python manage.py upload_images path/to/images.csv
 python manage.py upload_images path/to/images.csv --dry-run
 python manage.py upload_images --folder path/to/local/images
 python manage.py upload_images --folder path/to/local/images --dry-run
-python manage.py upload_images --cloudinary-folder feed_images
-python manage.py upload_images --cloudinary-folder feed_images --dry-run
+python manage.py upload_images --cloudinary-folder media/feed_images
+python manage.py upload_images --cloudinary-folder media/feed_images --dry-run
 """
 
 import csv
@@ -53,6 +67,7 @@ import logging
 import re
 from pathlib import Path
 import cloudinary.api
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -245,7 +260,34 @@ class Command(BaseCommand):
         the same "public_id.format" string _extract_cloudinary_public_id
         produces elsewhere in this file, so dedup checks work either way an
         image got imported).
+
+        MediaCloudinaryStorage (feed.models.Image's storage backend) always
+        prepends its configured PREFIX (CLOUDINARY_STORAGE['PREFIX'], which
+        defaults to settings.MEDIA_URL = "/media/") when building a delivery
+        URL from a stored name — unconditionally, unless the name already
+        starts with it. So a resource whose real Cloudinary public_id doesn't
+        start with that prefix can never resolve correctly through this
+        field: the storage would request "media/<real path>", a path that
+        doesn't exist. Normalizing the search prefix here (and thus every
+        public_id this method stores) to always start with "media/" is the
+        only way stored rows and the storage's own URL-building agree.
         """
+        storage_prefix = getattr(settings, "CLOUDINARY_STORAGE", {}).get(
+            "PREFIX", settings.MEDIA_URL
+        ).lstrip("/")
+        if storage_prefix and not storage_prefix.endswith("/"):
+            storage_prefix += "/"
+
+        if storage_prefix and not folder_prefix.startswith(storage_prefix):
+            normalized = f"{storage_prefix}{folder_prefix.lstrip('/')}"
+            self.stdout.write(
+                self.style.NOTICE(
+                    f"  Note: searching '{normalized}' instead of '{folder_prefix}' — "
+                    f"this storage backend only serves images from under '{storage_prefix}'."
+                )
+            )
+            folder_prefix = normalized
+
         resources = []
         next_cursor = None
         while True:
