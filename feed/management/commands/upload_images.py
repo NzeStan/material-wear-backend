@@ -8,7 +8,7 @@ CSV Format:
 image_url,active
 https://example.com/image1.jpg,true
 https://example.com/image2.jpg,false
-https://res.cloudinary.com/demo/image/upload/feed_images/banner.jpg,true
+https://res.cloudinary.com/demo/image/upload/feeds_images/banner.jpg,true
 
 Supported URLs:
 --------------
@@ -41,11 +41,11 @@ IMPORTANT: this project's Cloudinary storage backend (MediaCloudinaryStorage)
 always serves feed/product images from under a "media/" folder — every
 image ever uploaded *through this app* (admin, upload_images, upload_products)
 automatically lands there. An image dropped directly into Cloudinary's
-console under a folder that ISN'T under "media/" (e.g. plain "feed_images",
+console under a folder that ISN'T under "media/" (e.g. plain "feeds_images",
 or an existing folder like "hood_pics") will 404 once this app builds its
 URL, because the storage unconditionally prepends "media/" when reading.
 So: in Cloudinary's console, create your upload folder AS "media/<something>"
-(e.g. "media/feed_images") — a brand new folder, not one already holding
+(e.g. "media/feeds_images") — a brand new folder, not one already holding
 other site images — and pass that same path to --cloudinary-folder. This
 command auto-prepends "media/" if you forget it, but it can't tell a
 folder you *meant* to be under media from one you didn't, so pick a
@@ -57,8 +57,8 @@ python manage.py upload_images path/to/images.csv
 python manage.py upload_images path/to/images.csv --dry-run
 python manage.py upload_images --folder path/to/local/images
 python manage.py upload_images --folder path/to/local/images --dry-run
-python manage.py upload_images --cloudinary-folder media/feed_images
-python manage.py upload_images --cloudinary-folder media/feed_images --dry-run
+python manage.py upload_images --cloudinary-folder media/feeds_images
+python manage.py upload_images --cloudinary-folder media/feeds_images --dry-run
 """
 
 import csv
@@ -98,7 +98,7 @@ class Command(BaseCommand):
             "--cloudinary-folder",
             type=str,
             default=None,
-            help="Cloudinary folder prefix (e.g. 'feed_images') to sync from — "
+            help="Cloudinary folder prefix (e.g. 'feeds_images') to sync from — "
             "creates feed.Image rows for anything in that folder not already imported",
         )
         parser.add_argument(
@@ -548,7 +548,7 @@ class Command(BaseCommand):
         - https://res.cloudinary.com/{cloud_name}/image/upload/{transformations}/v{version}/{public_id}.{format}
         - https://res.cloudinary.com/{cloud_name}/image/upload/{public_id}.{format}
 
-        Returns: public_id with extension (e.g., "feed_images/banner.jpg")
+        Returns: public_id with extension (e.g., "feeds_images/banner.jpg")
         """
         try:
             # Split by /image/upload/

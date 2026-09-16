@@ -181,7 +181,7 @@ class ImageModelFieldTests(TestCase):
         """Test url field has correct upload_to path"""
         url_field = Image._meta.get_field('url')
         
-        self.assertEqual(url_field.upload_to, 'feed_images/')
+        self.assertEqual(url_field.upload_to, 'feeds_images/')
     
     def test_url_field_allows_blank(self):
         """Test url field allows blank values"""

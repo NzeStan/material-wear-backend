@@ -8,7 +8,7 @@ class Image(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     # FIXED: Changed from URLField to ImageField with Cloudinary storage
     url = models.ImageField(
-        upload_to='feed_images/',
+        upload_to='feeds_images/',
         storage=MediaCloudinaryStorage(),
         blank=True
     )
