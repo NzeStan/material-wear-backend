@@ -26,6 +26,8 @@ from drf_spectacular.views import (
 )
 from two_factor.urls import urlpatterns as tf_urls
 
+from .testimonial_views import ModeratorTestimonialStatsView
+
 # Harden the default admin site with branding
 admin.site.site_header = "Material Wear Admin Panel"
 admin.site.site_title = "Material Wear Admin"
@@ -65,6 +67,13 @@ urlpatterns = [
     path(
         "api/image_bulk_orders/",
         include("image_bulk_orders.urls", namespace="image_bulk_orders"),
+    ),
+    # Must precede the package include below: shadows its publicly-readable
+    # testimonials/stats/ route (see ModeratorTestimonialStatsView).
+    path(
+        "api/testimonials/testimonials/stats/",
+        ModeratorTestimonialStatsView.as_view(),
+        name="testimonials-moderator-stats",
     ),
     path("api/testimonials/", include("testimonials.api.urls")),
     path("api/live_forms/", include("live_forms.urls")),
