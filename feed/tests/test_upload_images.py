@@ -1112,7 +1112,7 @@ https://example.com/test.jpg,true"""
                 call_command("upload_images", csv_path, stdout=out)
 
                 output = out.getvalue()
-                self.assertIn("MATERIAL ACCESSORIES", output)
+                self.assertIn("MATERIAL WEAR", output)
                 self.assertIn("IMAGE UPLOAD", output)
         finally:
             os.unlink(csv_path)

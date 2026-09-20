@@ -12,6 +12,23 @@ from .serializers import (
 )
 from django.conf import settings
 
+# Used when no active promotional media has marketing text yet. WhatsApp-style
+# formatting: *bold*, _italic_; blank lines are kept.
+DEFAULT_MARKETING_TEXT = (
+    "🔥 *NYSC kits, church wear & NYSC tour packages — all in one place!* 🔥\n"
+    "\n"
+    "Serving in NYSC? Planning a church programme or a group order? "
+    "Material Wear Limited has you covered 🇳🇬\n"
+    "\n"
+    "✅ NYSC kits — Khaki, Vest & Cap 👕\n"
+    "✅ Church & programme shirts, jackets and polos ⛪\n"
+    "✅ NYSC tour packages for all 37 states 🗺️\n"
+    "✅ Group & bulk orders for your class, church or team 🤝\n"
+    "✅ Order online in minutes with secure payment 🔒\n"
+    "\n"
+    "_Quality you can trust — Material Wear Limited (RC 9161164)_"
+)
+
 
 class ReferrerProfileViewSet(viewsets.ModelViewSet):
     """
@@ -167,8 +184,10 @@ class SharePayloadViewSet(viewsets.ViewSet):
             "order", "-created_at"
         )
 
+        share_footer = self._build_share_footer(profile.referral_code)
+
         # Build share message
-        share_message = self._build_share_message(media, profile.referral_code)
+        share_message = self._build_share_message(media, share_footer)
 
         # Generate WhatsApp deep link
         whatsapp_link = self._generate_whatsapp_link(share_message)
@@ -179,44 +198,39 @@ class SharePayloadViewSet(viewsets.ViewSet):
             "referral_code": profile.referral_code,
             "whatsapp_link": whatsapp_link,
             "share_message": share_message,
+            "share_footer": share_footer,
         }
 
-        serializer = SharePayloadSerializer(payload)
         return Response(payload)
 
-    def _build_share_message(self, media, referral_code):
-        """Build the complete share message with marketing text and referral code"""
-        # Combine marketing texts from all active media
-        marketing_texts = [m.marketing_text for m in media if m.marketing_text]
+    def _build_share_footer(self, referral_code):
+        """Referral code + shop link, appended to every message a referrer shares."""
+        site_url = str(getattr(settings, "FRONTEND_URL", "")).rstrip("/")
+        lines = [f"💎 Use my referral code: *{referral_code}*"]
+        if site_url:
+            lines.append(f"🛍️ Shop here: {site_url}")
+        return "\n".join(lines)
 
-        if marketing_texts:
-            base_message = "\n\n".join(marketing_texts)
-        else:
-            base_message = (
-                "🎯 Check out MATERIAL Wear for quality NYSC uniforms, "
-                "church merchandise, and more!"
-            )
+    def _build_share_message(self, media, share_footer):
+        """
+        Build the complete share message: the first active item's marketing
+        text (admin controls which via the `order` field) plus the footer.
 
-        # Append referral code
-        message = f"{base_message}\n\n💎 Use my referral code: {referral_code}"
-
-        return message
+        Joining every active item's text into one message produced a wall of
+        text as soon as more than one flyer/video existed.
+        """
+        base_message = next(
+            (m.marketing_text.strip() for m in media if m.marketing_text.strip()),
+            DEFAULT_MARKETING_TEXT,
+        )
+        return f"{base_message}\n\n{share_footer}"
 
     def _generate_whatsapp_link(self, message):
         """
-        Generate WhatsApp deep link with pre-filled message.
+        WhatsApp deep link with the message pre-filled and NO fixed recipient,
+        so WhatsApp lets the referrer pick who to send it to.
 
-        WhatsApp API format:
-        https://wa.me/?text=<URL_ENCODED_MESSAGE>
-
-        Or for specific number:
-        https://wa.me/2348012345678?text=<URL_ENCODED_MESSAGE>
+        (This previously embedded the business WHATSAPP_NUMBER, which opened a
+        chat with Material Wear's own number instead of the referrer's friends.)
         """
-        whatsapp_number = getattr(settings, "WHATSAPP_NUMBER", "2348012345678")
-        # URL encode the message
-        encoded_message = quote(message)
-
-        # Generate deep link (without specific number, user can choose contact)
-        whatsapp_link = f"https://wa.me/{whatsapp_number}?text={encoded_message}"
-
-        return whatsapp_link
+        return f"https://wa.me/?text={quote(message)}"

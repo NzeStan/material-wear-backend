@@ -97,3 +97,4 @@ class SharePayloadSerializer(serializers.Serializer):
     referral_code = serializers.CharField(read_only=True)
     whatsapp_link = serializers.URLField(read_only=True)
     share_message = serializers.CharField(read_only=True)
+    share_footer = serializers.CharField(read_only=True)

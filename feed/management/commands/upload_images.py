@@ -122,7 +122,7 @@ class Command(BaseCommand):
 
         # Header
         self.stdout.write(self.style.SUCCESS("=" * 80))
-        self.stdout.write(self.style.SUCCESS("  MATERIAL ACCESSORIES - IMAGE UPLOAD"))
+        self.stdout.write(self.style.SUCCESS("  MATERIAL WEAR - IMAGE UPLOAD"))
         self.stdout.write(self.style.SUCCESS("=" * 80))
         source_desc = (
             csv_file

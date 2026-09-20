@@ -479,6 +479,9 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_URL = "/media/"
 
+# Keeps `manage.py test` from uploading to the real Cloudinary account.
+TEST_RUNNER = "material.test_runner.OfflineCloudinaryTestRunner"
+
 STORAGES = {
     "default": {
         "BACKEND": "material.storage_backends.SeekableMediaCloudinaryStorage",

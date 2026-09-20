@@ -16,6 +16,7 @@ from unittest.mock import patch, MagicMock
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 from rest_framework import status
+from django.test import override_settings
 from rest_framework.test import APITestCase, APIClient
 
 from referrals.models import ReferrerProfile, PromotionalMedia
@@ -696,17 +697,38 @@ class SharePayloadGenerateTests(APITestCase):
         self._make_active_profile()
         self.client.force_authenticate(user=self.user)
         response = self.client.get(share_generate_url())
-        self.assertIn("MATERIAL", response.data["share_message"])
+        self.assertIn("Material Wear", response.data["share_message"])
 
-    def test_share_message_combines_all_marketing_texts(self):
+    def test_share_message_uses_first_ordered_marketing_text_only(self):
+        """One message per share — not every active item's text glued together."""
         self._make_active_profile()
-        make_media(self.admin, marketing_text="Text A", is_active=True)
-        make_media(self.admin, title="B", marketing_text="Text B", is_active=True)
+        make_media(self.admin, marketing_text="Text A", is_active=True, order=1)
+        make_media(self.admin, title="B", marketing_text="Text B", is_active=True, order=2)
         self.client.force_authenticate(user=self.user)
         response = self.client.get(share_generate_url())
         msg = response.data["share_message"]
         self.assertIn("Text A", msg)
-        self.assertIn("Text B", msg)
+        self.assertNotIn("Text B", msg)
+
+    def test_share_message_preserves_emojis_and_line_breaks(self):
+        self._make_active_profile()
+        text = "🔥 *Big sale* 🔥\n\nNYSC kits ✅\nChurch wear ⛪"
+        make_media(self.admin, marketing_text=text, is_active=True)
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(share_generate_url())
+        self.assertIn(text, response.data["share_message"])
+        self.assertIn(text, response.data["promotional_media"][0]["marketing_text"])
+
+    def test_share_message_includes_shop_link_and_footer(self):
+        profile = self._make_active_profile()
+        self.client.force_authenticate(user=self.user)
+        with override_settings(FRONTEND_URL="https://shop.example.com/"):
+            response = self.client.get(share_generate_url())
+        footer = response.data["share_footer"]
+        self.assertIn(profile.referral_code, footer)
+        self.assertIn("https://shop.example.com", footer)
+        self.assertNotIn("example.com//", footer)
+        self.assertTrue(response.data["share_message"].endswith(footer))
 
     def test_share_message_always_ends_with_referral_code(self):
         profile = self._make_active_profile()
@@ -715,10 +737,12 @@ class SharePayloadGenerateTests(APITestCase):
         response = self.client.get(share_generate_url())
         self.assertIn(profile.referral_code, response.data["share_message"])
 
-    def test_whatsapp_link_uses_custom_number_from_settings(self):
+    def test_whatsapp_link_has_no_fixed_recipient(self):
+        """The referrer picks who to send to — the business number must not be baked in."""
         self._make_active_profile()
         self.client.force_authenticate(user=self.user)
-        with patch("referrals.views.settings") as mock_settings:
-            mock_settings.WHATSAPP_NUMBER = "2349012345678"
+        with override_settings(WHATSAPP_NUMBER="2349012345678"):
             response = self.client.get(share_generate_url())
-        self.assertIn("2349012345678", response.data["whatsapp_link"])
+        link = response.data["whatsapp_link"]
+        self.assertTrue(link.startswith("https://wa.me/?text="))
+        self.assertNotIn("2349012345678", link)

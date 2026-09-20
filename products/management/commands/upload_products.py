@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
         # Header
         self.stdout.write(self.style.SUCCESS("=" * 80))
-        self.stdout.write(self.style.SUCCESS("  MATERIAL ACCESSORIES - PRODUCT UPLOAD"))
+        self.stdout.write(self.style.SUCCESS("  MATERIAL WEAR - PRODUCT UPLOAD"))
         self.stdout.write(self.style.SUCCESS("=" * 80))
         self.stdout.write(f"\nProduct Type: {self.style.WARNING(product_type.upper())}")
         self.stdout.write(f"CSV File: {self.style.WARNING(csv_file)}")

@@ -34,6 +34,16 @@
             border: 2px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
+            /* Django admin's dark theme gives <select> a light text colour,
+               but this card is always white — without these the chosen
+               option renders white-on-white and looks blank. */
+            color: #333;
+            background-color: #fff;
+            color-scheme: light;
+        }
+        .form-group select option {
+            color: #333;
+            background-color: #fff;
         }
         .form-group select:focus {
             outline: none;

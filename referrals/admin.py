@@ -153,12 +153,24 @@ class PromotionalMediaAdmin(admin.ModelAdmin):
         }),
     )
     
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        field = super().formfield_for_dbfield(db_field, request, **kwargs)
+        if db_field.name == "marketing_text":
+            field.widget.attrs.update({"rows": 14, "cols": 80})
+            field.help_text = (
+                "Emojis and line breaks are kept exactly as typed. WhatsApp "
+                "formatting works too: *bold*, _italic_, ~strikethrough~. "
+                "The referrer's code and the shop link are added automatically "
+                "when they share, so don't include them here."
+            )
+        return field
+
     def save_model(self, request, obj, form, change):
         """Set created_by to current user if not set"""
         if not obj.created_by:
             obj.created_by = request.user
         super().save_model(request, obj, form, change)
-    
+
     def colored_title(self, obj):
         """Display title with brand color"""
         return format_html(
