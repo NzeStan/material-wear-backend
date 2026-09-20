@@ -67,11 +67,13 @@ class ReferrerProfileAdmin(admin.ModelAdmin):
     colored_full_name.short_description = 'Full Name'
     
     def referral_code_display(self, obj):
-        """Display referral code in a badge"""
+        """Referral code badge — clicking it opens the owner's full profile"""
+        url = reverse('admin:referrals_referrerprofile_change', args=[obj.pk])
         return format_html(
-            '<span style="background-color: #F59E0B; color: white; padding: 4px 8px; '
-            'border-radius: 4px; font-weight: bold; font-family: monospace;">{}</span>',
-            obj.referral_code
+            '<a href="{}" title="View owner: {}" style="background-color: #F59E0B; '
+            'color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; '
+            'font-family: monospace; text-decoration: none;">{}</a>',
+            url, obj.full_name, obj.referral_code
         )
     referral_code_display.short_description = 'Referral Code'
     

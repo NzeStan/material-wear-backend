@@ -55,9 +55,23 @@ class ReferrerProfileViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         """Set permissions based on action"""
-        if self.action in ["list", "destroy"]:
+        if self.action in ["list", "destroy", "by_code"]:
             return [IsAdminUser()]
         return [IsAuthenticated()]
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path=r"by-code/(?P<code>[A-Za-z0-9]{8})",
+        url_name="by-code",
+    )
+    def by_code(self, request, code=None):
+        """Admin only: look up a referrer (and their details) by referral code."""
+        profile = get_object_or_404(
+            ReferrerProfile.objects.select_related("user"),
+            referral_code=code.upper(),
+        )
+        return Response(self.get_serializer(profile).data)
 
     def create(self, request, *args, **kwargs):
         """Create a referrer profile for the authenticated user"""

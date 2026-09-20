@@ -161,6 +161,12 @@ class ReferrerProfileAdminDisplayMethodTests(TestCase):
         result = str(self.model_admin.referral_code_display(self.profile))
         self.assertIn(self.profile.referral_code, result)
 
+    def test_referral_code_display_links_to_owner_profile(self):
+        from django.urls import reverse
+        result = str(self.model_admin.referral_code_display(self.profile))
+        expected = reverse("admin:referrals_referrerprofile_change", args=[self.profile.pk])
+        self.assertIn(f'href="{expected}"', result)
+
     def test_referral_code_display_uses_amber_color(self):
         result = str(self.model_admin.referral_code_display(self.profile))
         self.assertIn("#F59E0B", result)

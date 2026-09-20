@@ -746,3 +746,49 @@ class SharePayloadGenerateTests(APITestCase):
         link = response.data["whatsapp_link"]
         self.assertTrue(link.startswith("https://wa.me/?text="))
         self.assertNotIn("2349012345678", link)
+
+
+# ---------------------------------------------------------------------------
+# ReferrerProfileViewSet – by-code lookup (admin: click a code -> its owner)
+# ---------------------------------------------------------------------------
+
+
+def by_code_url(code):
+    return reverse("referrals:referrer-profile-by-code", kwargs={"code": code})
+
+
+class ReferrerByCodeTests(APITestCase):
+
+    def setUp(self):
+        self.admin = make_admin()
+        self.user = make_user()
+        self.profile = make_profile(self.user)
+        self.client = APIClient()
+
+    def test_admin_gets_owner_details(self):
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.get(by_code_url(self.profile.referral_code))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["id"], str(self.profile.pk))
+        self.assertEqual(response.data["full_name"], self.profile.full_name)
+        self.assertEqual(response.data["user_email"], self.user.email)
+        self.assertEqual(response.data["bank_name"], self.profile.bank_name)
+
+    def test_lookup_is_case_insensitive(self):
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.get(by_code_url(self.profile.referral_code.lower()))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_unknown_code_returns_404(self):
+        self.client.force_authenticate(user=self.admin)
+        response = self.client.get(by_code_url("ZZZZZZZZ"))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_regular_user_cannot_look_up_codes(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.get(by_code_url(self.profile.referral_code))
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_unauthenticated_cannot_look_up_codes(self):
+        response = self.client.get(by_code_url(self.profile.referral_code))
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
